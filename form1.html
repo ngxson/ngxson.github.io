@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset='UTF-8'>
+	<title>Iridescent Prom CNH</title>
+	
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- FB Open graph tag -->
+    <meta property="og:title" content="Iridescent Prom CNH"/>
+    <meta property="og:site_name" content="chuyenla"/>
+
+    <meta property="og:url" content="http://iridescent.com"/>
+    <meta property="og:description" content="Chào mừng bạn đã đến với Iridescent Prom 2016"/>
+    <meta property="og:image" content=""/>
+    <meta property="og:type" content="article"/>
+	
+	<link rel="stylesheet" class="cp-pen-styles" type="text/css" href="style.css">
+</head>
+
+<body>
+<div class="wrapper">
+	<div class="card radius shadowDepth1">
+		<div class="card__content card__padding_header">
+			<div class="card__author">
+				<!-- TODO: Need a logo here -->
+				<!--a href="http://bancobiet.top/">
+				<img src="" alt="user"></a-->
+				<div class="card__author-content">
+					<b>Đặt vé Iridescent Prom 2016</b>
+				</div>
+			</div>
+			
+		</div>
+
+		<div class="card__content card__padding">
+
+			<article class="card__article">
+				<font size="4sp">
+				<b><p>BÁN TRỰC TIẾP </p></b>
+				<p>&nbsp</p>
+				<div ng-app="app">
+						<div ng-controller="chatCtrl">
+							<form>
+								<h1><p><b>Số lượng vé đơn còn lại: </b><b id="numofAvaTicket">Loading</b></p></h1>
+								<p>&nbsp</p>
+								<center id="loading"><p>Bạn hãy chờ mình chút xíu nhé...</br>
+								<img src="img/loading.gif" height="50" width="50"></center></p>
+								<p id="fromMainView" style="display: none;">
+									(*) Bắt buộc phải điền</br>
+									&nbsp</br>
+									<b>Tên của bạn(*):</b> (Ví dụ: Nguyễn Phồng Tôm)</br>
+									<input type="text" ng-model="nameMes" style="font-size : 20px; width: 100%; height: 35px;"/> </br>&nbsp</br>
+									<b>Lớp - Niên khóa(*):</b></br>
+									<select id="optionLop" style="font-size : 20px; width: 49%; height: 35px;">
+										<option value="0" style="font-size : 20px" selected="selected">Niên khóa</option>
+										<option value="99" style="font-size : 20px">Cựu học sinh</option>
+										<option value="10" style="font-size : 20px">Lớp 10 - K68</option>
+										<option value="11" style="font-size : 20px">Lớp 11 - K67</option>
+										<option value="12" style="font-size : 20px">Lớp 12 - K66</option>
+									</select>
+									<select id="optionChuyen" style="font-size : 20px; width: 49%; height: 35px;">
+										<option value="0" style="font-size : 20px" selected="selected">Chọn chuyên</option>
+										<option value="1" style="font-size : 20px">Toán 1</option>
+										<option value="2" style="font-size : 20px">Toán 2</option>
+										<option value="3" style="font-size : 20px">Lý 1</option>
+										<option value="4" style="font-size : 20px">Lý 2</option>
+										<option value="5" style="font-size : 20px">Văn</option>
+										<option value="6" style="font-size : 20px">Anh 1</option>
+										<option value="7" style="font-size : 20px">Anh 2</option>
+										<option value="8" style="font-size : 20px">Sử</option>
+										<option value="9" style="font-size : 20px">Địa</option>
+										<option value="10" style="font-size : 20px">Tin</option>
+										<option value="11" style="font-size : 20px">Pháp 1</option>
+										<option value="12" style="font-size : 20px">Pháp 2</option>
+										<option value="14" style="font-size : 20px">Nga</option>
+										<option value="15" style="font-size : 20px">Hóa 1</option>
+										<option value="16" style="font-size : 20px">Hóa 2</option>
+										<option value="17" style="font-size : 20px">Sinh</option>
+									</select></br>&nbsp</br>
+									<b>Số điện thoại(*):</b> </br>
+									<input type="text" ng-model="chatMes" style="font-size : 20px; width: 100%; height: 35px;"/> </br>&nbsp</br>
+									<b>Email(*):</b> </br><input type="text" ng-model="mailMes" style="font-size : 20px; width: 100%; height: 35px;"/> </br>&nbsp</br>
+									<b>Cách thức nhận vé:</b> </br>
+									<td>
+										&nbsp&nbsp&nbsp
+										<input type="radio" class="text1" name="accEnrol" id ="vea" value ="Yes" style="width: 20px; height: 20px;">&nbsp&nbsp
+										Nhận tại trường</input> </br>
+										&nbsp&nbsp&nbsp
+										<input type="radio" class="text1" name="accEnrol" id ="veb" value ="No" style="width: 20px; height: 20px;">&nbsp&nbsp
+										Ship về tận nhà (phí ship có ở bảng dưới)</input> </br>
+									</td>
+									<br>&nbsp</br>
+									<b>Địa chỉ:</b> (Chỉ áp dụng cho ship về tận nhà)</br><input type="text" ng-model="diachi2" style="font-size : 20px; width: 100%; height: 35px;"/> </br>&nbsp</br>
+									<b>Quận huyện:</b> (Chỉ áp dụng cho ship về tận nhà, phí ship có trong bảng)</br>
+									<select id="ddlViewBy" style="font-size : 20px; width: 100%; height: 35px;">
+										<option value="1" selected="selected" style="font-size : 20px">Không chọn</option>
+										<option value="5" style="font-size : 20px">Hà Đông: 5k</option>
+										<option value="10" style="font-size : 20px">Thanh Xuân: 10k</option>
+										<option value="25" style="font-size : 20px">Hai Bà Trưng: 25k</option>
+										<option value="26" style="font-size : 20px">Hoàn Kiếm: 25k</option>
+										<option value="20" style="font-size : 20px">Các quận còn lại: 20k</option>
+									</select>
+									&nbsp</br>
+									<div id="submitbtn" style="display: none;">
+									<center>Bạn hãy nhớ kiểm tra thật kỹ lại thông tin nhé.</br>Lưu ý: vé đã đặt không được hoàn trả lại.</br></center>
+									<center><button type="submit" id="submitbtn" ng-click="sendChat()" style="font-size : 20px; width: 75%; height: 50px; color: #ffffff; font-weight: bold; background-color: #bf0000;">BÁN TRỰC TIẾP</button></center></br></div>
+								</p>
+								<p><b id="finalMsg"></b></br>
+								<a href="/uber/index.html"><b id="finalMsgUber"></b></a>
+							</form>
+						</div>
+					</div>
+				</font>
+			</article>
+		</div>
+		
+		<div class="card__content card__padding">
+			<article class="card__article">
+			<font size="5sp">
+				<a href="/"><p>◄ Quay về trang chủ</p></a>
+			</font>
+			</article>
+		</div>
+
+		<div class="card__action">
+			Note: Nếu có sai sót trong việc đặt vé, hãy liên hệ ngay với Ban tổ chức qua facebook.</br></br>
+		
+			Designed by bạn đẹp trai
+		</div>
+	</div>
+</div>
+<canvas id="canvas"></canvas>
+<script src='jquery.min.js'></script>
+<script src='animate_bg.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
+<!--script src="http://ngxson.github.io/background.js"></script-->
+
+<script>
+	var maxTicket = 498;
+	var saveNumofTicket = 0;
+	var databaseLink = "https://nui-prom.firebaseio.com/";
+	var waitMsg = "Xin bạn đợi chút...";
+	var doneMsg = "Chúc mừng ";
+	var doneMsg2 = "Bạn đã đặt vé thành công. Chúc bạn có một đêm dạ hội vui vẻ!</br>";
+	var doneMsgUber = "Thông báo: Hãy BẤM VÀO ĐÂY để xem hướng dẫn sử dụng dịch vụ Uber miễn phí. Cảm ơn bạn rất nhiều!</br></br>";
+	var nomoreticket = "Chúng mình hết vé mất rồi bạn ạ. Tệ thật! :(";
+	var errNotFullFill = "Bạn còn chỗ quên chưa điền kìa!";
+	var errNoAddr = "Bạn chưa điền địa chỉ nhà kìa!";
+	//begin
+	document.getElementById("submitbtn").style.display = "none";
+	document.getElementById('vea').checked = true;
+	document.getElementById("fromMainView").style.display = "none";
+	document.getElementById("loading").style.visibility = "visible";
+	var app = angular.module('app', ['firebase']);
+	var loaive = 1;
+	app.controller('chatCtrl', ['$scope', '$firebase',
+		function($scope, $firebase) {
+			num=0;
+			$scope.num = "hello world";
+			$scope.nameMes = "";
+			$scope.mailMes = "";
+			$scope.mclassMes = "";
+			$scope.chatMes = "";
+			$scope.diachi2 = "";
+			
+			//Kết nối tới service của firebase
+			var ref = new Firebase(databaseLink);
+			var sync = $firebase(ref.child('mydata')).$asArray();
+			sync.$loaded().then(function(arr) {
+				//$scope.num = ("num"+arr.length);
+				document.getElementById("loading").style.display = "none";
+				saveNumofTicket = maxTicket - arr.length;
+				if(saveNumofTicket < 1) {
+					document.getElementById("numofAvaTicket").innerHTML = (nomoreticket);
+				} else {
+					document.getElementById("submitbtn").style.display = "inline";
+					document.getElementById("numofAvaTicket").innerHTML = (saveNumofTicket);
+					document.getElementById("fromMainView").style.display = "inline";
+				}
+			});
+			
+			$scope.sendChat = function() {
+				/* get option params */
+				var e = document.getElementById("ddlViewBy");
+				var diachiid = e.options[e.selectedIndex].value;
+				var e1 = document.getElementById("optionChuyen");
+				var chuyenid = e1.options[e1.selectedIndex].value;
+				var chuyenstr = e1.options[e1.selectedIndex].text;
+				var e2 = document.getElementById("optionLop");
+				var lopid = e2.options[e2.selectedIndex].value;
+				
+				
+				/*lalalalalalala*/
+				if(document.getElementById('veb').checked) loaive = 2;
+				else loaive = 1;
+				
+				if(($scope.nameMes == "") ||
+					($scope.mailMes == "") ||
+					((lopid != 9)&&(chuyenid == 0)) ||
+					(lopid == 0) ||
+					($scope.chatMes == "")) {
+					alert (errNotFullFill);
+				} else if((loaive == 1) || ((loaive == 2) && (diachiid != 1) && ($scope.diachi2 != ""))) {
+					document.getElementById("submitbtn").style.display = "none";
+					document.getElementById("finalMsg").innerHTML = ("<center>"+waitMsg+"</center>");
+				
+					if (loaive == 1) {
+						$scope.diachi2="";
+						diachiid=1;
+					}
+					
+					var currentdate = new Date(); 
+					var datetime = currentdate.getDate() + "/"
+									+ (currentdate.getMonth()+1) + "~"  
+									+ currentdate.getHours() + ":"  
+									+ currentdate.getMinutes();
+					
+					//send data to server
+					var chatMessage = {
+						a: datetime, //time
+						b: $scope.nameMes, //name
+						c: chuyenid, //chuyen
+						d: lopid, //lop
+						e: $scope.chatMes, //sdt
+						f: $scope.mailMes, //mail
+						g: $scope.diachi2, //addr
+						h: diachiid, //ship
+						s: true
+					};
+					sync.$add(chatMessage).then(function() {
+						console.log("successful!");
+						document.getElementById("numofAvaTicket").innerHTML = (saveNumofTicket - 1);
+						document.getElementById("finalMsg").innerHTML = (doneMsg + $scope.nameMes + "! </br>" + doneMsg2);
+						document.getElementById("finalMsgUber").innerHTML = (doneMsgUber);
+						document.getElementById("fromMainView").style.display = "none";
+					}).catch(function(error) {
+						console.error("Error: ", error);
+						alert("Lỗi. Bạn hãy kiểm tra lại mạng :(");
+					});
+				} else {
+					alert(errNoAddr);
+				}
+			}
+		}
+	]);
+</script>
+</body></html>
