@@ -137,5 +137,124 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
 <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
 <script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
-<script src="http://ngxson.github.io/background.js"></script>
+<script>
+	var maxTicket = 498;
+	var saveNumofTicket = 0;
+	var databaseLink = "https://nui-prom.firebaseio.com/";
+	var waitMsg = "Xin bạn đợi chút...";
+	var doneMsg = "Chúc mừng ";
+	var doneMsg2 = "Bạn đã đặt vé thành công. Chúc bạn có một đêm dạ hội vui vẻ!</br>";
+	var doneMsgUber = "Thông báo: Hãy BẤM VÀO ĐÂY để xem hướng dẫn sử dụng dịch vụ Uber miễn phí. Cảm ơn bạn rất nhiều!</br></br>";
+	var nomoreticket = "Chúng mình hết vé mất rồi bạn ạ. Tệ thật! :(";
+	var errNotFullFill = "Bạn còn chỗ quên chưa điền kìa!";
+	var errNoAddr = "Bạn chưa điền địa chỉ nhà kìa!";
+	var errDuplicated = "Xin lỗi bạn nhưng mỗi người chỉ được đặt 1 vé thôi.";
+	//begin
+	document.getElementById("submitbtn").style.display = "none";
+	document.getElementById('vea').checked = true;
+	document.getElementById("fromMainView").style.display = "none";
+	document.getElementById("loading").style.visibility = "visible";
+	var app = angular.module('app', ['firebase']);
+	var loaive = 1;
+	app.controller('chatCtrl', ['$scope', '$firebase',
+		function($scope, $firebase) {
+			num=0;
+			$scope.num = "hello world";
+			$scope.nameMes = "";
+			$scope.mailMes = "";
+			$scope.mclassMes = "";
+			$scope.chatMes = "";
+			$scope.diachi2 = "";
+			
+			//Kết nối tới service của firebase
+			var ref = new Firebase(databaseLink);
+			var sync = $firebase(ref.child('mydata')).$asArray();
+			sync.$loaded().then(function(arr) {
+				//$scope.num = ("num"+arr.length);
+				document.getElementById("loading").style.display = "none";
+				saveNumofTicket = maxTicket - arr.length;
+				if(saveNumofTicket < 1) {
+					document.getElementById("numofAvaTicket").innerHTML = (nomoreticket);
+				} else {
+					document.getElementById("submitbtn").style.display = "inline";
+					document.getElementById("numofAvaTicket").innerHTML = (saveNumofTicket);
+					document.getElementById("fromMainView").style.display = "inline";
+				}
+			});
+			
+			$scope.sendChat = function() {
+				/* get option params */
+				var e = document.getElementById("ddlViewBy");
+				var diachiid = e.options[e.selectedIndex].value;
+				var e1 = document.getElementById("optionChuyen");
+				var chuyenid = e1.options[e1.selectedIndex].value;
+				var chuyenstr = e1.options[e1.selectedIndex].text;
+				var e2 = document.getElementById("optionLop");
+				var lopid = e2.options[e2.selectedIndex].value;
+				var isDuplicated = false;
+				
+				/*lalalalalalala*/
+				if(document.getElementById('veb').checked) loaive = 2;
+				else loaive = 1;
+				
+				sync.forEach(function(todo){
+					if(((todo.b).toUpperCase() == ($scope.nameMes).toUpperCase()) &&
+						(todo.c == chuyenid) &&
+						(todo.d == lopid)) {
+							isDuplicated = true;
+						}
+				});
+				
+				if(($scope.nameMes == "") ||
+					($scope.mailMes == "") ||
+					((lopid != 9)&&(chuyenid == 0)) ||
+					(lopid == 0) ||
+					($scope.chatMes == "")) {
+					alert (errNotFullFill);
+				} else if(isDuplicated) {
+					alert (errDuplicated);
+				} else if((loaive == 1) || ((loaive == 2) && (diachiid != 1) && ($scope.diachi2 != ""))) {
+					document.getElementById("submitbtn").style.display = "none";
+					document.getElementById("finalMsg").innerHTML = ("<center>"+waitMsg+"</center>");
+				
+					if (loaive == 1) {
+						$scope.diachi2="";
+						diachiid=1;
+					}
+					
+					var currentdate = new Date(); 
+					var datetime = currentdate.getDate() + "/"
+									+ (currentdate.getMonth()+1) + "~"  
+									+ currentdate.getHours() + ":"  
+									+ currentdate.getMinutes();
+					
+					//send data to server
+					var myTicketData = {
+						a: datetime, //time
+						b: $scope.nameMes, //name
+						c: chuyenid, //chuyen
+						d: lopid, //lop
+						e: $scope.chatMes, //sdt
+						f: $scope.mailMes, //mail
+						g: $scope.diachi2, //addr
+						h: diachiid, //ship
+						s: true
+					};
+					sync.$add(myTicketData).then(function() {
+						console.log("successful!");
+						document.getElementById("numofAvaTicket").innerHTML = (saveNumofTicket - 1);
+						document.getElementById("finalMsg").innerHTML = (doneMsg + $scope.nameMes + "! </br>" + doneMsg2);
+						document.getElementById("finalMsgUber").innerHTML = (doneMsgUber);
+						document.getElementById("fromMainView").style.display = "none";
+					}).catch(function(error) {
+						console.error("Error: ", error);
+						alert("Lỗi. Bạn hãy kiểm tra lại mạng :(");
+					});
+				} else {
+					alert(errNoAddr);
+				}
+			}
+		}
+	]);
+</script>
 </body></html>
