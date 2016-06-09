@@ -1,98 +1,28 @@
+---
+layout: default
+---
+{% assign posts_count = (paginator.posts | size) %}
 
-<!DOCTYPE html><html class=''>
-<head>
+<div class="home">
+  {% if posts_count > 0 %}
+    <div class="posts">
+      {% for post in paginator.posts %}
+        <div class="post py3">
+          <p class="post-meta">{{ post.date | date: site.date_format }}</p>
+          <a href="{{ post.url | prepend: site.baseurl }}" class="post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
+          <p class="post-summary">
+            {% if post.summary %}
+              {{ post.summary }}
+            {% else %}
+              {{ post.excerpt }}
+            {% endif %}
+          </p>
+        </div>
+      {% endfor %}
+    </div>
 
-	<meta charset='UTF-8'>
-	<title>Iridescent Prom CNH</title>
-	
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <!-- FB Open graph tag -->
-    <meta property="og:title" content="Iridescent Prom CNH"/>
-    <meta property="og:site_name" content="chuyenla"/>
-
-    <meta property="og:url" content="http://iridescent.com"/>
-    <meta property="og:description" content="Chào mừng bạn đã đến với Iridescent Prom 2016"/>
-    <meta property="og:image" content=""/>
-    <meta property="og:type" content="article"/>
-	
-	<link rel="stylesheet" class="cp-pen-styles" type="text/css" href="style.css">
-</head>
-
-<body>
-<div class="wrapper">
-	<div class="card radius shadowDepth1">
-		<div class="card__content card__padding_header">
-			<div class="card__author">
-				<!-- TODO: Need a logo here -->
-				<!--a href="http://bancobiet.top/">
-				<img src="" alt="user"></a-->
-				<div class="card__author-content">
-					<b>Iridescent Prom 2016</b>
-				</div>
-			</div>
-			
-		</div>
-		
-		<div class="card__content card__padding">
-			<article class="card__article">
-			<font size="4sp">
-				<b><p><H1>BÁN VÉ TRỰC TIẾP: </H1></p></b>
-			</font>
-			</article>
-		</div>
-		
-		<a href="form1.html">
-		<div class="card__content card__padding_ticket">
-			<article class="card__article">
-				<center><H1><b><p>VÉ ĐƠN (Giá vé: 75.000 VNĐ) </H1></p></b></center>
-			</article>
-		</div>
-		</a>
-
-		<a href="form2.html">
-		<div class="card__content card__padding_ticket">
-			<article class="card__article">
-				<center><H1><b><p>VÉ ĐÔI (Giá vé: 145.000 VNĐ) </H1></p></b></center>
-			</article>
-		</div>
-		</a>
-		
-		<div class="card__content card__padding">
-			<article class="card__article">
-			<font size="5sp">
-				<a href="/"><p>◄ Quay về trang chủ</p></a>
-			</font>
-			</article>
-		</div>
-		
-		<!--a href="cancel_ticket.php">
-		<div class="card__content card__padding_headerr">
-			<center><b style="color: #000000;">Hủy vé</b></center>
-		</div>
-		</a-->
-
-		<div class="card__action">
-			Designed by bạn đẹp trai
-		</div>
-	</div>
+    {% include pagination.html %}
+  {% else %}
+    <h1 class='center'>{{ site.text.index.coming_soon }}</h3>
+  {% endif %}
 </div>
-<canvas id="canvas"></canvas>
-<script src='jquery.min.js'></script>
-<script src='animate_bg.js'></script>
-
-<script>
-	var isOperaMini = (navigator.userAgent.indexOf('Opera Mini') > -1);
-	if(isOperaMini) alert("Đăng ký vé bằng Opera Mini có thể sẽ lỗi. Nếu không đăng ký được, bạn hãy thử lại bằng trình duyệt khác nhé!");
-</script>
-<!--script>$(document).ready(function ($) {
-    $('.card__share > a').on('click', function (e) {
-        e.preventDefault();
-        $(this).parent().find('div').toggleClass('card__social--active');
-        $(this).toggleClass('share-expanded');
-    });
-});
-//# sourceURL=pen.js
-</script-->
-</body></html>
