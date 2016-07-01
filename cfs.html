@@ -1,0 +1,14 @@
+<html>
+<head></head>
+<body>
+<iframe id="some_frame_id" src="http://nui.pe.hu/cfs_tiin.php"></iframe>
+<script>
+setTimeout(func, 30000);
+function func() {
+	//document.getElementById('some_frame_id').contentWindow.location.reload();
+	location.reload();
+	setTimeout(func, 30000);
+}
+</script>
+</body>
+</html>
