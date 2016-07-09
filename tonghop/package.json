@@ -1,0 +1,44 @@
+{
+  "name": "jquery-google-sheet-to-json",
+  "version": "0.1.2",
+  "description": "JQuery plugin to aquire JSON data from a Google Docs spreadsheet in name/value format.",
+  "main": "jquery-google-sheet-to-json.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha-phantomjs/bin/mocha-phantomjs test/standard/index.html && ./node_modules/mocha-phantomjs/bin/mocha-phantomjs test/minified/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/confluentforms/jquery-google-sheet-to-json.git"
+  },
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "google",
+    "sheets",
+    "docs",
+    "json"
+  ],
+  "author": "Thomas Leen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/confluentforms/jquery-google-sheet-to-json/issues"
+  },
+  "homepage": "https://github.com/confluentforms/jquery-google-sheet-to-json#readme",
+  "devDependencies": {
+    "chai": "3.5.0",
+    "eslint-config-standard": "^5.1.0",
+    "eslint-plugin-standard": "^1.3.2",
+    "gulp": "3.9.1",
+    "gulp-eslint": "2.0.0",
+    "gulp-rename": "1.2.2",
+    "gulp-uglify": "1.5.3",
+    "jquery": "2.2.1",
+    "mocha": "2.4.5",
+    "mocha-phantomjs": "4.0.2",
+    "sinon-dist": "1.15.4"
+  }
+}
