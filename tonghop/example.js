@@ -32,15 +32,17 @@ $(document).ready(function(){
 						//if(name != 'timestamp') $dl.append('<dt>' + name + '</dt><dd>' + val + '</dd>')
 						//console.log(val.replace(/\n/g, "</br>"));
 					});
-					$dl.append('<dt>-- ' + namee + ' --</dt><dd>'+
-					'</br>Mô tả: '+describe+'</br></br>'+
-					' - Link facebook: <a href=\''+linkk+'\' target=\'_blank\'>'+linkk+'</a></br>'+
-					' - Yêu cầu đối tượng: '+target+'</br>'+
-					' - Deadline tuyển người: '+deadline+'</br>'+
-					' - Ngày bắt đầu: '+datestart+'</br>'+
-					' - Ngày kết thúc: '+dateend+'</br>'+
-					' - Quyền lợi cơ bản: </br>'+benefit+'</br>'+
-					'</dd>');
+					var posttext = '<dt>-- ' + namee + ' --</dt><dd>';
+					
+					if(describe != "") posttext += '</br>Mô tả: '+describe+'</br></br>';
+					posttext += ' - Link facebook: <a href=\''+linkk+'\' target=\'_blank\'>'+linkk+'</a></br>'+
+						' - Yêu cầu đối tượng: '+target+'</br>';
+					if(deadline != "") posttext += ' - Deadline tuyển người: '+deadline+'</br>';
+					posttext += ' - Ngày bắt đầu: '+datestart+'</br>'+
+						' - Ngày kết thúc: '+dateend+'</br>';
+					if(benefit != "") posttext += ' - Quyền lợi cơ bản: </br>'+benefit+'</br>';
+
+					$dl.append(posttext+'</dd>');
 					$container.append($dl);
 				});
 				$(document.body).append($container);
