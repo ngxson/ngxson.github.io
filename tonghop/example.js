@@ -14,7 +14,7 @@ $(document).ready(function(){
 				//$container.append('<h1>Output</h1>');
 				rows.reverse().forEach(function(row){
 					$dl = $('<dl>');
-					var Timestamp, namee, fb, mota, deadline, need, benefit, a1, a2 = '';
+					var Timestamp, namee, fb, mota, deadline, need, benefit, a1, a2;
 					Object.getOwnPropertyNames(row).forEach(function(name){
 						var val = [].concat(row[name]).join(' / ');
 						//var val = row[name];
