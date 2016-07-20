@@ -38,8 +38,8 @@ $(document).ready(function(){
 					posttext += '</br> Mô tả dự án: </br>'+mota+'</br></br>'
 					posttext += ' - Link facebook: <a href=\''+fb+'\' target=\'_blank\'>'+fb+'</a></br>';
 					if(need != undefined) posttext += ' - Yêu cầu đối tượng: '+need+'</br>';
-					if(deadline != undefined) posttext += ' - Deadline tuyển người: '+deadline+'</br>';
-					if(benefit != undefined) posttext += ' - Quyền lợi cơ bản: </br>'+benefit+'</br>';
+					if(deadline != undefined) posttext += ' - Deadline tuyển nhân sự: '+deadline+'</br>';
+					if(benefit != undefined) posttext += ' - Quyền lợi khi tham gia dự án: </br>'+benefit+'</br>';
 					if(deadline != undefined) posttext += '</br> == phần không copy ==</br>';
 					if(a1 != undefined) posttext += ' - Cần share bài ko? '+a1+'</br>';
 					if(a2 != undefined) posttext += ' - Góp ý? '+a2+'</br>';
