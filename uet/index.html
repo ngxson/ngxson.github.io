@@ -29,14 +29,12 @@
             <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
         </div>
     </form>
+	<iframe id="iframe" src="http://codehub.now-ip.org/login" />
     <!-- END LOGIN FORM -->
 </div>
 <script src='jquery.min.js'></script>
 <script>
-	$.get('http://codehub.now-ip.org/login',
-		function (response) {
-			console.log(response);
-	});
+setTimeout(function {console.log($('#iframe').contents().find("html").html();}, 2000);
 </script>
 </body>
 
