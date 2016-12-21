@@ -36,9 +36,9 @@ $(document).ready(function(){
 					var posttext = '<dt>-- ' + namee + ' --</dt><dd>';
 
 					posttext += '</br> Mô tả dự án: </br>'+mota+'</br></br>'
-					posttext += ' - Link facebook: <a href=\''+fb+'\' target=\'_blank\'>'+fb+'</a></br>';
-					if(need != undefined) posttext += ' - Yêu cầu đối tượng: '+need+'</br>';
-					if(deadline != undefined) posttext += ' - Deadline: '+deadline+'</br>';
+					posttext += ' + Link facebook: <a href=\''+fb+'\' target=\'_blank\'>'+fb+'</a></br>';
+					if(need != undefined) posttext += ' + Yêu cầu đối tượng: '+need+'</br>';
+					if(deadline != undefined) posttext += ' + Deadline: '+deadline+'</br>';
 					if(benefit != undefined) posttext += ' + Quyền lợi khi tham gia dự án: </br>'+benefit+'</br>';
 					if((a1 != undefined)||(a2 != undefined)) posttext += '</br> == phần không copy ==</br>';
 					if(a1 != undefined) posttext += ' - Cần share bài ko? '+a1+'</br>';
