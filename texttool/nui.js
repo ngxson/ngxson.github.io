@@ -1,5 +1,5 @@
 function nui_replace() {
-	//$('#dl-trigger').trigger();
+	$('#dl-trigger').removeClass('dl-active');$('.dl-menu').removeClass('dl-menuopen');$('.dl-menu').removeClass('dl-subview');$('.dl-menu').addClass('dl-menu-toggle');
 	var editor = ace.edit("editor");
 	var mytext = editor.getValue();
 	bootbox.dialog({
@@ -28,7 +28,7 @@ function nui_replace() {
 }
 
 function nui_regexp() {
-	//$('#dl-trigger').trigger();
+	$('#dl-trigger').removeClass('dl-active');$('.dl-menu').removeClass('dl-menuopen');$('.dl-menu').removeClass('dl-subview');$('.dl-menu').addClass('dl-menu-toggle');
 	var editor = ace.edit("editor");
 	var mytext = editor.getValue();
 	bootbox.dialog({
@@ -57,7 +57,7 @@ function nui_regexp() {
 }
 
 function nui_add_top_end() {
-	//$('#dl-trigger').trigger();
+	$('#dl-trigger').removeClass('dl-active');$('.dl-menu').removeClass('dl-menuopen');$('.dl-menu').removeClass('dl-subview');$('.dl-menu').addClass('dl-menu-toggle');
 	var editor = ace.edit("editor");
 	var mytext = editor.getValue();
 	bootbox.dialog({
@@ -95,7 +95,7 @@ function nui_add_top_end() {
 }
 
 function nui_add_char() {
-	//$('#dl-trigger').trigger();
+	$('#dl-trigger').removeClass('dl-active');$('.dl-menu').removeClass('dl-menuopen');$('.dl-menu').removeClass('dl-subview');$('.dl-menu').addClass('dl-menu-toggle');
 	var editor = ace.edit("editor");
 	var mytext = editor.getValue();
 	bootbox.dialog({
@@ -145,7 +145,7 @@ function nui_add_char() {
 }
 
 function nui_del_top_end() {
-	//$('#dl-trigger').trigger();
+	$('#dl-trigger').removeClass('dl-active');$('.dl-menu').removeClass('dl-menuopen');$('.dl-menu').removeClass('dl-subview');$('.dl-menu').addClass('dl-menu-toggle');
 	var editor = ace.edit("editor");
 	var mytext = editor.getValue();
 	bootbox.dialog({
@@ -193,7 +193,7 @@ function nui_del_top_end() {
 
 
 function nui_del_mid() {
-	//$('#dl-trigger').trigger();
+	$('#dl-trigger').removeClass('dl-active');$('.dl-menu').removeClass('dl-menuopen');$('.dl-menu').removeClass('dl-subview');$('.dl-menu').addClass('dl-menu-toggle');
 	var editor = ace.edit("editor");
 	var mytext = editor.getValue();
 	bootbox.dialog({
@@ -226,7 +226,7 @@ function nui_del_mid() {
 }
 
 function nui_del_empty() {
-	//$('#dl-trigger').trigger();
+	$('#dl-trigger').removeClass('dl-active');$('.dl-menu').removeClass('dl-menuopen');$('.dl-menu').removeClass('dl-subview');$('.dl-menu').addClass('dl-menu-toggle');
 	var editor = ace.edit("editor");
 	var mytext = editor.getValue();
 	bootbox.dialog({
@@ -249,7 +249,7 @@ function nui_del_empty() {
 }
 
 function nui_proper() {
-	//$('#dl-trigger').trigger();
+	$('#dl-trigger').removeClass('dl-active');$('.dl-menu').removeClass('dl-menuopen');$('.dl-menu').removeClass('dl-subview');$('.dl-menu').addClass('dl-menu-toggle');
 	var editor = ace.edit("editor");
 	var mytext = editor.getValue();
 	bootbox.dialog({
@@ -271,7 +271,7 @@ function nui_proper() {
 }
 
 function nui_add_number() {
-	//$('#dl-trigger').trigger();
+	$('#dl-trigger').removeClass('dl-active');$('.dl-menu').removeClass('dl-menuopen');$('.dl-menu').removeClass('dl-subview');$('.dl-menu').addClass('dl-menu-toggle');
 	var editor = ace.edit("editor");
 	var mytext = editor.getValue();
 	bootbox.dialog({
@@ -321,5 +321,37 @@ function nui_add_number() {
 			});
 		}
 		editor.setValue(arrayofLines.join("\r\n"),1);
+	});
+}
+
+function nui_short_name() {
+	$('#dl-trigger').removeClass('dl-active');$('.dl-menu').removeClass('dl-menuopen');$('.dl-menu').removeClass('dl-subview');$('.dl-menu').addClass('dl-menu-toggle');
+	var editor = ace.edit("editor");
+	var mytext = editor.getValue();
+	bootbox.dialog({
+		message: '<p class="text-center">Lấy 2 từ của tên riêng</p>'+
+			'Lưu ý: dấu xuống dòng sẽ đc chuyển thành \\r\\n. Dòng trống sẽ ko đc sửa gì.<br/><br/>'+
+			'Ví dụ:<br/>'+'Nguyễn Xuân Sơn => Xuân Sơn<br/>'+'Nguyễn Thị Kiều Trang => Kiểu Trang<br/>'+'Nguyễn Văn Linh => Nguyễn Linh<br/>'+'Nguyễn Thị Hoa => Nguyễn Hoa<br/>'+'Vũ Hoàng => Vũ Hoàng<br/>',
+		closeButton: true,
+		buttons: {
+			btn1: {
+				label: 'OKAY',
+				className: 'btn btn-primary nui-btn-1'
+			}
+		}
+	});
+	$('.modal-backdrop').remove();
+	$('.nui-inp-1').val(editor.getCursorPosition().column);
+	//click handler
+	$(".nui-btn-1").click(function(){
+		var arrayofLines = mytext.replace(/\r\n|\n\r|\n|\r/g,"\n").split("\n");
+		arrayofLines.forEach(function (item, index) {
+			if (arrayofLines[index] != "") {
+				var words = arrayofLines[index].trim().split(/\s+/);;
+				if (words.length>2)
+					arrayofLines[index] = chooseShortNameWords(words[0], words[i-2], words[i-1]);
+			}
+		});
+		editor.setValue(arrayofLines.join("\r\n"));
 	});
 }

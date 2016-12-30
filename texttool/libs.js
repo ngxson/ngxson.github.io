@@ -14,12 +14,12 @@ function getInput(name) {
 	return $('.nui-inp-'+name).val();
 }
 
-function laTenDem(str) {
-	mstr = toTitleCase(str);
-	if (mstr == "Thị" ||
-		mstr == "Văn" ||
-		mstr == "Anh") return false;
-	else return true;
+function chooseShortNameWords(a,b,c) {
+	if (b == "Thị" || b == "Văn") {
+		return a+" "+c;
+	} else {
+		return b+" "+c;
+	}
 }
 
 if (!String.prototype.splice) {
