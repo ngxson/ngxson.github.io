@@ -36,7 +36,7 @@ div {
 	$.get('https://docs.google.com/spreadsheets/d/1QKNV7TvD4UWeuSB4oWXIBUGnuW3LzaY41kIrBk69fBE/pub?gid=1384646195&single=true&output=csv',
 		function (response) {
 			response = autoURL(response);
-			$("#include").html(response.replace(/\n/g, "<br/>"));
+			$("#include").html((response.replace(/\n/g, "<br/>")+" -->").slice(4));
 	});
 	
 	function autoURL(text) {
