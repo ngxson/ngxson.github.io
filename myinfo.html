@@ -1,0 +1,51 @@
+
+<html>
+<head>
+<meta charset='UTF-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<style>
+a {
+	color: black; text-decoration: none; 
+	background:yellow;
+	font-size:1.4em;
+}
+
+i {
+	background: #bbeeee;
+}
+div {
+    padding-left: 1.5em;
+    text-indent:-1.5em;
+}
+</style>
+</head>
+<body>
+	Nhập họ và tên thật của Nui: <br/>
+	(đánh tiếng việt không dấu)<br/>
+	<input id="name" style="height:25px; width:100%"></input></br>
+	<button value="Okay" id="btn">&nbsp;&nbsp;&nbsp;&nbsp;Okay&nbsp;&nbsp;&nbsp;&nbsp;</button><br/>
+
+<br/>
+
+<script src='jquery.min.js'></script>
+<script>
+	$('#btn').click(function() {
+		var name = $('#name').val();
+		function xor(l,key) {
+			var local3 = 0;
+			var local4 = 0;
+			var res = [];
+			while(local4 < l.length) {
+				res[local4] = String.fromCharCode(l[local4] ^ key.charCodeAt(local3));
+				local3++;
+				local4++;
+				if(local3 >= key.length) local3 = 0;
+			}
+			alert("Sđt "+res.join(''));
+		};
+		
+		xor([0x5e, 0x56, 0x43, 0x4a, 0x53, 0x5f, 0x17, 0x41, 0x46, 0x58, 0x5d], name.toLowerCase());
+	});
+</script>
+
+</body></html>
