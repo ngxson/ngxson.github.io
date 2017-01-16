@@ -773,7 +773,7 @@ button {
 button:hover {
   background: #138a72;
 }
-button.--usr-rtn::before {
+/*button.--usr-rtn::before {
   content: 'Sign in';
 }
 button.--usr-new::before {
@@ -781,7 +781,7 @@ button.--usr-new::before {
 }
 button.--usr-rst::before {
   content: "reset password";
-}
+}*/
 </style>
 <style>
 /* The Modal (background) */
@@ -866,7 +866,7 @@ button.--usr-rst::before {
       <input type="text" placeholder ="Tiếng Việt không dấu" autocomplete="off" class="ui-field" id="js-field__email"/>
       <!--input type="password" placeholder ="password" class="ui-field" id="js-field__pass"/-->
       <!--input type="password" placeholder ="repeat password" class="ui-field" id="js-field__r-pass"/-->
-      <button id="js-btn" class="ui-button --usr-new"></button>
+      <button id="js-btn" class="ui-button --usr-new">Hiện SĐT</button>
     </form>
 </div>
 <!-- The Modal -->
@@ -884,6 +884,16 @@ button.--usr-rst::before {
   </div>
 
 </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-78579525-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
 <script>$('.select__label').click(function () {
     $('.select__label').removeClass('select__label--active');
