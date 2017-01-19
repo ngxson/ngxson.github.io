@@ -246,19 +246,20 @@ h2.heading {
   <h3><a href="https://fb.com/ngxson" target="_blank">Ghé thăm fanpage&nbsp;&nbsp;<i class="fa fa-facebook"></i> 
   </a></h3>
 </header>
-<form action="https://script.google.com/macros/s/AKfycbxuD12ZrAdINwy4WANCvtCxnAy9QAS84qTWqMitLeQ7SsuriNE/exec" method="post">
+<form action="https://script.google.com/macros/s/AKfycbxuD12ZrAdINwy4WANCvtCxnAy9QAS84qTWqMitLeQ7SsuriNE/exec" method="post"
+    id="mform">
   <!--  More -->
   <div class="form-group">
     <h2 class="heading">Viết "lời thú tội" của bạn vào đây</h2>
     <div class="controls">
       <!--input type="email" id="email" class="floatLabel" name="email"-->
-      <textarea name="cfs" class="floatLabel" id="comments"></textarea>
+      <textarea name="cfs" class="floatLabel" id="cfs"></textarea>
       <label for="cfs">Say something...</label>
     </div>
   </div>
   <div class="form-group">
     <div class="controls">
-      <button>Tiếp tục &gt;</button>
+      <button type="button" id="msubmit">Tiếp tục &gt;</button>
     </div>
   </div>
 </form>
@@ -279,6 +280,29 @@ h2.heading {
     }
     floatLabel('.floatLabel');
 }(jQuery));
-//# sourceURL=pen.js
+
+$('#msubmit').click( function() {
+	var cfs = $('#cfs').val();
+	if (cfs == "" | cfs == null) {
+	    alert('Không thể gửi 1 confession trống');
+	    return;
+	}
+	if (cfs.length > 8000) {
+	    alert('Bài viết không được vượt quá 8000 ký tự');
+	    return;
+	}
+	if (cfs.split(/\r\n|\r|\n/).length > 30) {
+	    alert('Không được xuống dòng quá 30 lần');
+	    return;
+	}
+	if (cfs.length < 24) {
+	    alert('Bài viết quá ngắn!');
+	    return;
+	}
+	document.getElementById("mform").submit();
+});
+if (navigator.userAgent.indexOf('Opera Mini') >= 0) {
+   document.getElementById("mform").innerHTML = "<h2 class=\"heading\">Trình duyệt bạn đang dùng không được hỗ trợ</h2>";
+}
 </script>
 </body></html>
