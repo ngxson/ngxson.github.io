@@ -235,6 +235,7 @@ h2.heading {
   border: none;
   color: #fff;
   padding: 12px 0;
+  font-weight: 500;
 }
 .controls button:hover {
   background-color: #08ccb7;
@@ -259,12 +260,16 @@ h2.heading {
   </div>
   <div class="form-group">
     <div class="controls">
-      <button type="button" id="msubmit">Tiếp tục &gt;</button>
+      <button type="button" id="msubmit">TIẾP TỤC &gt;</button>
     </div>
   </div>
 </form>
+<script>if (navigator.userAgent.indexOf('Opera Mini') >= 0) {
+   document.getElementById("mform").innerHTML = "<h2 class=\"heading\">Trình duyệt bạn đang dùng không được hỗ trợ</h2>";
+}</script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script>(function ($) {
+<script>
+(function ($) {
     function floatLabel(inputType) {
         $(inputType).each(function () {
             var $this = $(this);
@@ -301,8 +306,5 @@ $('#msubmit').click( function() {
 	}
 	document.getElementById("mform").submit();
 });
-if (navigator.userAgent.indexOf('Opera Mini') >= 0) {
-   document.getElementById("mform").innerHTML = "<h2 class=\"heading\">Trình duyệt bạn đang dùng không được hỗ trợ</h2>";
-}
 </script>
 </body></html>
