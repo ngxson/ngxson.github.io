@@ -262,7 +262,7 @@ h2.heading {
   </a></h3>
 </header>
 <!--form action="https://script.google.com/macros/s/AKfycbxuD12ZrAdINwy4WANCvtCxnAy9QAS84qTWqMitLeQ7SsuriNE/exec" method="post"-->
-<form action="https://script.google.com/macros/s/AKfycby6odII_8WKxd_FxMPAVWJIlgCWAYW3brTFEySKxfs/dev" method="post"
+<form action="https://script.google.com/macros/s/AKfycbx6nGYQp0LWw-RlObPPy6upc2bbbxLO3Q2t8MoTfY8/dev" method="post"
     id="mform">
   <!--  More -->
   <div class="form-group">
@@ -315,7 +315,7 @@ function recaptchaCallback() {
 
 $('#msubmit').click( function() {
 	var cfs = $('#cfs').val();
-	if (captcha_checked) {
+	if (!captcha_checked) {
 	    alert('Lỗi: Bạn chưa xác nhận captcha');
 	    return;
 	}
