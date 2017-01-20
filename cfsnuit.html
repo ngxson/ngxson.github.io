@@ -282,6 +282,7 @@ h2.heading {
   <div class="form-group">
     <div class="controls">
       <button type="button" id="msubmit">GỬI NGAY!</button>
+	  <center id="msending" style="display:none"><img src="http://ngxson.github.io/loading.gif" width="25px" height="25px" /><br/><h1><b>Đang gửi...</b></h1></center>
     </div>
   </div>
 </form>
@@ -315,26 +316,28 @@ function recaptchaCallback() {
 
 $('#msubmit').click( function() {
 	var cfs = $('#cfs').val();
-	if (!captcha_checked) {
-	    alert('Lỗi: Bạn chưa xác nhận captcha');
+	if (cfs == "" | cfs == null) {
+	    alert('Lỗi: Không thể gửi 1 confession trống.');
 	    return;
 	}
-	if (cfs == "" | cfs == null) {
-	    alert('Lỗi: Không thể gửi 1 confession trống');
+	if (!captcha_checked) {
+	    alert('Lỗi: Bạn chưa xác nhận captcha.');
 	    return;
 	}
 	if (cfs.length > 8000) {
-	    alert('Lỗi: Bài viết không được vượt quá 8000 ký tự');
+	    alert('Lỗi: Bài viết không được vượt quá 8000 ký tự. Nếu bạn cần viết dài hơn, hãy inbox với admin của page.');
 	    return;
 	}
 	if (cfs.split(/\r\n|\r|\n/).length > 30) {
-	    alert('Lỗi: Không được xuống dòng quá 30 lần');
+	    alert('Lỗi: Không được xuống dòng quá 30 lần. Nếu bạn cần viết dài hơn, hãy inbox với admin của page.');
 	    return;
 	}
 	if (cfs.length < 24) {
-	    alert('Lỗi: Bài viết quá ngắn!');
+	    alert('Lỗi: Bài viết quá ngắn.');
 	    return;
 	}
+	$('#msubmit').hide();
+	$('#msending').show();
 	document.getElementById("mform").submit();
 });
 </script>
