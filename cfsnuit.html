@@ -378,6 +378,8 @@ function postmyform(cfs, gcaptcha) {
 				$('#thanksview').show();
 			} else {
 				$('#errview').show();
+				$('#msubmit').show();
+				$('#msending').hide();
 				$('#err_msg').html(data);
 			}
 		},
