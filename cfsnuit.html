@@ -298,6 +298,7 @@ h2.heading {
     </div>
   </div>
 </form>
+<iframe style="display:none; width:0px; height:0px;" id="callback"></iframe>
 <script>if (navigator.userAgent.indexOf('Opera Mini') >= 0) {
    alert("Trình duyệt bạn đang dùng không được hỗ trợ. Chúng mình khuyên dùng chrome, firefox hoặc safari.");
 }</script>
@@ -370,12 +371,13 @@ function postmyform(cfs, gcaptcha) {
 				"g-recaptcha-response": gcaptcha},
 		type: "POST",
 		dataType: "text",
-		timeout: 5000,
+		timeout: 15000,
 		success: function (data) {
 			//alert(data);
 			if (data == "OK") {
 				$('#mainview').hide();
 				$('#thanksview').show();
+				document.getElementById("callback").src = "https://script.google.com/macros/s/AKfycbxhvERdDEfi9EK-jgqZMcuVJBxp4pY8OUEfcGyigr-y6XaZUQ/exec";
 			} else {
 				$('#errview').show();
 				$('#msubmit').show();
@@ -386,6 +388,8 @@ function postmyform(cfs, gcaptcha) {
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
 			alert("Có lỗi xảy ra: \n"+thrownError);
+			$('#msubmit').show();
+			$('#msending').hide();
 		}
 	});
 }
