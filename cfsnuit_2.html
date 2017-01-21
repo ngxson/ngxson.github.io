@@ -344,16 +344,16 @@ function submitform() {
 }
 
 function postmyform(cfs, gcaptcha) {
-	/*$.ajaxPrefilter( function (options) {
+	$.ajaxPrefilter( function (options) {
 		if (options.crossDomain && jQuery.support.cors) {
 			var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
 			options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
 			//options.url = "http://cors.corsproxy.io/url=" + options.url;
 			console.log(options.url)
 		}
-	});*/
+	});
     $.ajax({
-		url: "https://script.google.com/macros/s/AKfycbx6nGYQp0LWw-RlObPPy6upc2bbbxLO3Q2t8MoTfY8/dev",
+		url: "https://script.google.com/macros/s/AKfycbxDV-cofG7DBGPXyH0aBWTlI5TaKrKrylk0FtrEJw_twzAam1IT/exec",
 		data: {"cfs": cfs,
 				"g-recaptcha-response": gcaptcha},
 		type: "POST",
