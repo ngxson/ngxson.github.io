@@ -262,8 +262,7 @@ h2.heading {
   </a></h3>
 </header>
 <!--form action="https://script.google.com/macros/s/AKfycbxuD12ZrAdINwy4WANCvtCxnAy9QAS84qTWqMitLeQ7SsuriNE/exec" method="post"-->
-<form action="https://script.google.com/macros/s/AKfycbx6nGYQp0LWw-RlObPPy6upc2bbbxLO3Q2t8MoTfY8/dev" method="post"
-    id="mform">
+<form id="mform">
   <!--  More -->
   <div class="form-group">
     <h2 class="heading">Viết "lời thú tội" của bạn vào đây</h2>
@@ -276,7 +275,7 @@ h2.heading {
   <div class="form-group" id="mainview">
 	<h2 class="heading">Xác nhận captcha</h2>
     <div class="controls">
-          <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6LcqihIUAAAAAIBWKg_Iw4eHJ_Mz-pdn_ranHgWX" data-theme="light" data-sitekey="XXXXXXXXXXXXX" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
+          <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6LcqihIUAAAAAIBWKg_Iw4eHJ_Mz-pdn_ranHgWX" data-theme="light" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
     </div>
   </div>
   <div class="form-group">
@@ -314,7 +313,9 @@ function recaptchaCallback() {
 	captcha_checked = true;
 }
 
-$('#msubmit').click( function() {
+$('#msubmit').click(submitform);
+
+function submitform() {
 	var cfs = $('#cfs').val();
 	if (cfs == "" | cfs == null) {
 	    alert('Lỗi: Không thể gửi 1 confession trống.');
@@ -338,7 +339,33 @@ $('#msubmit').click( function() {
 	}
 	$('#msubmit').hide();
 	$('#msending').show();
-	document.getElementById("mform").submit();
-});
+	postmyform(cfs, grecaptcha.getResponse());
+	//document.getElementById("mform").submit();
+}
+
+function postmyform(cfs, gcaptcha) {
+	/*$.ajaxPrefilter( function (options) {
+		if (options.crossDomain && jQuery.support.cors) {
+			var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+			options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+			//options.url = "http://cors.corsproxy.io/url=" + options.url;
+			console.log(options.url)
+		}
+	});*/
+    $.ajax({
+		url: "https://script.google.com/macros/s/AKfycbx6nGYQp0LWw-RlObPPy6upc2bbbxLO3Q2t8MoTfY8/dev",
+		data: {"cfs": cfs,
+				"g-recaptcha-response": gcaptcha},
+		type: "POST",
+		dataType: "xml",
+		timeout: 5000,
+		success: function (data) {
+			alert(data);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			alert("Có lỗi xảy ra: \n"+thrownError);
+		}
+	});
+}
 </script>
 </body></html>
