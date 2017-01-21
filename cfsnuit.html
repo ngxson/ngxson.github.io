@@ -358,6 +358,7 @@ function submitform() {
 }
 
 function postmyform(cfs, gcaptcha) {
+	document.getElementById("callback").src = "https://script.google.com/macros/s/AKfycbxhvERdDEfi9EK-jgqZMcuVJBxp4pY8OUEfcGyigr-y6XaZUQ/exec";
 	$.ajaxPrefilter( function (options) {
 		if (options.crossDomain && jQuery.support.cors) {
 			var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
@@ -377,7 +378,6 @@ function postmyform(cfs, gcaptcha) {
 			if (data == "OK") {
 				$('#mainview').hide();
 				$('#thanksview').show();
-				document.getElementById("callback").src = "https://script.google.com/macros/s/AKfycbxhvERdDEfi9EK-jgqZMcuVJBxp4pY8OUEfcGyigr-y6XaZUQ/exec";
 			} else {
 				$('#errview').show();
 				$('#msubmit').show();
