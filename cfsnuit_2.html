@@ -263,7 +263,7 @@ h2.heading {
 </header>
 <!--form action="https://script.google.com/macros/s/AKfycbxuD12ZrAdINwy4WANCvtCxnAy9QAS84qTWqMitLeQ7SsuriNE/exec" method="post"-->
 <form id="mform">
-  <!--  More -->
+<div id="mainview">
   <div class="form-group">
     <h2 class="heading">Viết "lời thú tội" của bạn vào đây</h2>
     <div class="controls">
@@ -272,10 +272,16 @@ h2.heading {
       <label for="cfs">Say something...</label>
     </div>
   </div>
-  <div class="form-group" id="mainview">
+  <div class="form-group">
 	<h2 class="heading">Xác nhận captcha</h2>
     <div class="controls">
           <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6LcqihIUAAAAAIBWKg_Iw4eHJ_Mz-pdn_ranHgWX" data-theme="light" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
+    </div>
+  </div>
+  <div class="form-group"  id="errview" style="display:none">
+	<h2 class="heading">Có lỗi xảy ra</h2>
+    <div class="controls">
+      <h1 style="color:red" id="err_msg"></h1>
     </div>
   </div>
   <div class="form-group">
@@ -284,9 +290,16 @@ h2.heading {
 	  <center id="msending" style="display:none"><img src="http://ngxson.github.io/loading.gif" width="25px" height="25px" /><br/><h1><b>Đang gửi...</b></h1></center>
     </div>
   </div>
+</div>
+  <div class="form-group" id="thanksview" style="display:none">
+	<h2 class="heading">Thành công</h2>
+    <div class="controls">
+      <h1 style="">Cảm ơn bạn!<br/><br/>Chúng mình sẽ đăng confession của bạn sớm nhất có thể.</h1>
+    </div>
+  </div>
 </form>
 <script>if (navigator.userAgent.indexOf('Opera Mini') >= 0) {
-   document.getElementById("mform").innerHTML = "<h2 class=\"heading\">Trình duyệt bạn đang dùng không được hỗ trợ</h2>";
+   alert("Trình duyệt bạn đang dùng không được hỗ trợ. Chúng mình khuyên dùng chrome, firefox hoặc safari.");
 }</script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script>
@@ -348,7 +361,6 @@ function postmyform(cfs, gcaptcha) {
 		if (options.crossDomain && jQuery.support.cors) {
 			var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
 			options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
-			//options.url = "http://cors.corsproxy.io/url=" + options.url;
 			console.log(options.url)
 		}
 	});
@@ -357,10 +369,17 @@ function postmyform(cfs, gcaptcha) {
 		data: {"cfs": cfs,
 				"g-recaptcha-response": gcaptcha},
 		type: "POST",
-		dataType: "xml",
+		dataType: "text",
 		timeout: 5000,
 		success: function (data) {
-			alert(data);
+			//alert(data);
+			if (data == "OK") {
+				$('#mainview').hide();
+				$('#thanksview').show();
+			} else {
+				$('#errview').show();
+				$('#err_msg').html(data);
+			}
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
 			alert("Có lỗi xảy ra: \n"+thrownError);
