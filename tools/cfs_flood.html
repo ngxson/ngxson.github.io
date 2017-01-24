@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Tool spam confession - by Nui Nui</title>
+</head>
+<body>
+</body>
+<h1>Tool spam confession - by Nui Nui</h1>
+<br/> >> Link google form:<br/>
+Là link như kiểu https://docs.google.com/forms/d/e/1FAIpQLSeY2QDmKmFJeJB4Z_9XBVI5Isa-SCmpdFTs6cmIYYzewW1CCw/viewform<br/>
+<b>KHÔNG PHẢI LINK FACEBOOK FANPAGE NHÉ</b><br/>
+<input id="linkcfs" style="width:100%"></input><br/>
+<br/> >> Nhập id đã tìm được:<br/>
+Ví dụ tìm đc là "entry.1405160202" thì nhập số 1405160202 xuống ô dưới này<br/>
+entry. <input id="entrycfs"></input><br/>
+<br/> >> Thời gian gửi (sau mỗi mấy giây):<br/>
+Ví dụ 0.5 hay 2 giây. Mặc định là 0.5 giây<br/>
+<input id="timeoutcfs" value="0.5"></input> giây<br/>
+<br/>
+<button id="btn">BẮT ĐẦU</button>
+<div id="info"></div>
+<script src="http://code.jquery.com/jquery-2.0.2.js"></script>
+<script>
+	var tudien = ["Mấy","tuần","sau","bố","mình","gọi","cho","mình","nói","rằng","bố","xin","lỗi","vì","chuyện","nợ","nần","nhưng","không","thể","đi","làm","ở","nơi","ấy","được","Bởi","người","ta","đã","có","thành","kiến","mình","làm","cho","họ","chắc","chỉ","chịu","thiệt","và","không","thoải","mái","thôi","Song","vẫn","chưa","hiểu","chuyện","gì","thì","nhận","được","tin","nhắn","của","cậu","ấy","khoe","rằng","đã","tìm","được","công","việc","cho","bố","Hóa","ra","cậu","ấy","kể","chuyện","của","bố","mình","cho","gia","đình","họ","bố","cậu","ấy","còn","nói","hay","bố","mình","vô","làm","công","nhân","cho","nhà","họ","đi","Bố","mình","từng","làm","chức","cao","giờ","bố","đã","lớn","tuổi","rồi","sức","khỏe","cung","yếu","tuy","không","ngại","làm","việc","nặng","nhọc","nhưng","mình","vẫn","mong","bố","mẹ","tự","xoay","sở","một","gian","hàng","nhỏ","đỡ","hơn","đi","làm","công","Nếu","đây","là","lời","từ","những","người","không","quen","biết","có","lẽ","mình","sẽ","không","buồn","như","thế","Nghe","xong","mình","giận","buồn","uất","ức","tủi","thân","vô","cùng","Biết","rằng","cậu","ấy","có","ý","tốt","giúp","đỡ","nhưng","sự","thiếu","chu","đáo","và","suy","nghĩ","đơn","giản","làm","chuyện","trở","nên","phức","tạp","hơn","nhiều","mình","không","còn","chút","tình","cảm","nào","với","bố","mẹ","cậu","ấy","nữa","lại","cách","suy","nghĩ","của","mình","Chưa","kể","có","thể","bạn","kia","đọc","được","những","dòng","cfs","tiêu","cực","như","thế","sẽ","bị","tổn","thương","tâm","lí","nữa","Mà","mỗi","người","1","sở","thích","1","lối","sống","nếu","bạn","kia","chưa","làm","các","em","mất","quà","sáng","thì","các","em","lôi","lên","cfs","để","chửi","và","soi","mói","linh","tinh","thì","đúng","là","rảnh","rỗi","Chị","muốn","bày","tỏ","chút","suy","nghĩ","thôi","mong","mọi","người","cùng","một","mái","nhà","Nguyễn","Huệ","sẽ","đoàn","kết","và","có","3","năm","cấp","3","thật","đẹp","Đừng","có","nghĩ","được","mấy","bà","chị","hot","hot","ủng","hộ","là","mình","làm","gì","cũng","đúng","Vừa","vô","duyên","vừa","mất","dạy","vl","Mày","nghĩ","chửi","bậy","mất","dạy","như","bố","đời","là","hay","à","Bạn","nữ","nào","đó","hay","chém","tiếng","Anh","lớp","11","Pháp","A","làm","ơn","đừng","ngồi","xàm","nữa","nhé","Mình","ngồi","cách","lớp","bạn","đến","2","dãy","mà","còn","nghe","mồn","một","tiếng","bạn","khó","chịu","lắm","Mình","rất","thích","Tiếng","Anh","dù","đó","không","phải","môn","chuyên","của","mình","nên","xin","bạn","đừng","làm","nó","nữa","Ở","đây","bạn","lại","còn","chém","tiếng","Anh","trực","tiếp","trước","mặt","lớp","chuyên","Anh","bạn","không","biết","xấu","hổ","à","Mình","đã","cố","gắng","lịch","sự","hết","cỡ","rồi","đấy","admin","làm","ơn","đừng","bỏ","qua","mình","nhé","Thân","\n","?",".",".",".",".",".",".",".",".",".",".",".",".",".",",","\n","\n","\n","\n","\n","\n","\n","\n",".",".",".",".",".",".",".",".",".",".",".",".",".",",",".",".",".",".",".",".",".",".",".",".",".",".",".",",",",",",",",",",",",",",",",",",",",",","];
+	//sendCfs();
+	var linkcfs, entrycfs, timeoutcfs,count=0;
+	function startNow() {
+		$('#btn').hide();
+		var linkcfss = ($('#linkcfs').val()).split("/");
+		linkcfs = "https://docs.google.com/forms/d/e/"+linkcfss[linkcfss.length-2]+"/formResponse";
+		entrycfs = $('#entrycfs').val();
+		timeoutcfs = +($('#timeoutcfs').val())*1000;
+		sendCfs();
+	}
+	$('#btn').click(startNow);
+	function sendCfs() {
+		count++;
+		var content = getRandomCfs();
+		var values = { };
+		values['entry.' + entrycfs] = content;
+		$.ajax({
+			url: linkcfs,
+			data: values,
+			type: "POST",
+			dataType: "xml",
+			statusCode: {
+				0: function() {},
+				200: function() {}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+			}
+		});
+		$('#info').html("<b>Đã gửi: "+count+" lần<br/>Nội dung:</b><br/>"+content.replace(/\n/g, "<br/>"));
+		setTimeout(sendCfs, timeoutcfs);
+	}
+	function getRandomCfs() {
+		var cfs = tudien[getRandomInt(0, 120)]+" ";
+		for (var i=0; i < getRandomInt(20, 250); i++) {
+			var word = tudien[getRandomInt(0, tudien.length - 2)];
+			if (word == "," || word == "." || word == "?" || word == "\n") {
+				cfs = cfs.substring(0, cfs.length-1);
+				cfs += word + " ";
+			} else 
+				cfs += word + " ";
+		}
+		cfs += tudien[getRandomInt(0, tudien.length - 2)];
+		return cfs;
+	}
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+</script>
+</html>
