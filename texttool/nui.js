@@ -349,6 +349,7 @@ function nui_short_name() {
 			if (arrayofLines[index] != "") {
 				var words = arrayofLines[index].trim().split(/\s+/);;
 				if (words.length>2)
+					var i = words.length;
 					arrayofLines[index] = chooseShortNameWords(words[0], words[i-2], words[i-1]);
 			}
 		});
