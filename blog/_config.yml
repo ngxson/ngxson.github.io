@@ -8,7 +8,7 @@ keywords: "voge"
 url: "//vogeorg.github.io" # the base hostname & protocol for your site
 baseurl: "blog" # the subpath of your site, e.g. /blog/
 paginate: 5
-paginate_path: "page:num"
+paginate_path: "/blog/page:num"
 # Build settings
 markdown: kramdown
 highlighter: rouge
