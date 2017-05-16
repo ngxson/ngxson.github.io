@@ -2076,30 +2076,21 @@ fieldset[disabled] .mui-btn-accent.mui-btn-flat:active {
  */
 .mui-appbar-height {
   height: inherit;
-  transition: all 0.3s ease;
-  -webkit-transition: all 0.3s ease;
+  min-height: 64px;
   -webkit-animation: fadein-header 2s cubic-bezier(0.3,1,0,1);
 	animation: fadein-header 2s cubic-bezier(0.3,1,0,1);
 	-webkit-animation-name: fadein-header;
 	-webkit-animation-duration: 2s;
 	-webkit-animation-iteration-count: 1;
 	-webkit-animation-timing-function: cubic-bezier(0.3,1,0,1);
-}
-
-@media (orientation: landscape) and (max-height: 480px) {
-  .mui-appbar-height {
-    height: inherit;
-  }
-}
-
-@media (min-width: 480px) {
-  .mui-appbar-height {
-    height: inherit;
-  }
+    -webkit-transition:width 300ms ease-in-out, height 300ms ease-in-out;
+    -moz-transition:width 300ms ease-in-out, height 300ms ease-in-out;
+    -o-transition:width 300ms ease-in-out, height 300ms ease-in-out;
+    transition:width 300ms ease-in-out, height 300ms ease-in-out;
 }
 
 .mui-appbar-min-height, .mui-appbar {
-  min-height: 56px;
+  min-height: 64px;
 }
 
 @media (orientation: landscape) and (max-height: 480px) {

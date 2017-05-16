@@ -3,12 +3,28 @@
 	<div class="mui-container">
 		<div style="float: left">
 	<a class="site-title" href="{{ site.baseurl }}/">
-		<h1><img src="{{ site.baseurl }}/img/logo.png" height="36px" width="36px" align="middle">&nbsp;NUI BLOG</h1>
+		<h1><img src="{{ site.baseurl }}/img/logo.png" height="36px" width="36px" align="middle" id="siteBarToggle">&nbsp;NUI BLOG</h1>
 	</a>
 	</div>
 	</div><br/>
-	<div class="mui-container" id="siteBarAction">
-		<h2>Thong tin</h2>
+	<div class="mui-container" id="siteBarAction" style="display:none">
+		<br/>
+		<h2 style="color:white">About me</h2>
+		<h2 style="color:white">My facebook</h2>
+		<h2 style="color:white">Tags</h2>
 	</div>
+	
+	<script>
+		var appBarMenuShow = false;
+		$('#siteBarToggle').click(function () {
+			if (!appBarMenuShow) {
+				$('#siteBarAction').slideDown();
+				appBarMenuShow = true;
+			} else {
+				$('#siteBarAction').slideUp();
+				appBarMenuShow = false;
+			}
+		});
+	</script>
 
 </header>
