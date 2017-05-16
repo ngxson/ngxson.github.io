@@ -3,8 +3,12 @@ layout: default
 ---
 
 <div class="home mui-row">
-  <div class="mui-col-md-8">
-  {% for post in paginator.posts %}
+{% for post in paginator.posts %}
+{% if forloop.index == 1 %}
+<div class="mui-col-md-12">
+{% else %}
+<div class="mui-col-md-6">
+{% endif %}
     <article class="mui-panel-post">
       <div class="bg-holder {% if post.color %}bg-{{ post.color }}{% endif %}" style="{% if post.cover %}background:url({{post.cover}}) no-repeat center center{% endif %}">
         <h2 class="post-list-title">
@@ -27,7 +31,9 @@ layout: default
         {% endif %}
       </div>
     </article>
-  {% endfor %}
+</div>
+{% endfor %}
+  <div class="mui-col-md-12">
   <div class="paginator">
     {% if paginator.previous_page %}
     <a href="{{ paginator.previous_page_path }}" class="mui-btn mui-btn-primary"><i class="fa fa-chevron-circle-left"></i></a>
@@ -37,7 +43,7 @@ layout: default
     <a href="{{ paginator.next_page_path }}" class="mui-btn mui-btn-primary"><i class="fa fa-chevron-circle-right"></i></a>
     {% endif %}
   </div>
-  <!-- <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p> -->
   </div>
-  {% include sidebar.html %}
+  <!-- <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p> -->
+  <!--% include sidebar.html %-->
 </div>
