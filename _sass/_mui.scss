@@ -2076,6 +2076,8 @@ fieldset[disabled] .mui-btn-accent.mui-btn-flat:active {
  */
 .mui-appbar-height {
   height: inherit;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
   -webkit-animation: fadein-header 2s cubic-bezier(0.3,1,0,1);
 	animation: fadein-header 2s cubic-bezier(0.3,1,0,1);
 	-webkit-animation-name: fadein-header;
