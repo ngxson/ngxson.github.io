@@ -1,7 +1,7 @@
 ---
 layout: post
 color: blue
-cover: ''
+cover: 'https://scontent-hkg3-1.xx.fbcdn.net/v/t31.0-8/18489555_230063814154907_6483819104876045425_o.jpg?oh=02d1a6602307d71f0046eacc498fb43a&oe=597B84B0'
 title:  'BLOG #6: BÌNH CHỌN BẰNG COMMENT (P1)'
 date: 2017-05-17 01:00:07
 tags: facebook
