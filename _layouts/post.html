@@ -1,27 +1,402 @@
----
-layout: default
-title: Home
----
 
-<div class='xs-12 topBar hidden'>
-  <p>{{ page.title }}</p>
-</div>
+<!DOCTYPE html><html class=''>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div class="xs-12 imgBack textCenter vertCenter banner" style='background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1) ), url({{ site.url }}/assets/img/{{ page.thumbnail }})'>
-  <div>
-    <a class='caps post-title' href='{{ post.url }}'>{{ page.title }}</a>
-    <p class='meta'>{{ page.date | date_to_long_string }} / by {{ page.author }}</p>
+  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <link rel="icon" href="http://vogeorg.github.io/img/smalllogo.png">
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description | strip_newlines }}{% endif %}">
+  
+  <link href='http://fonts.googleapis.com/css?family=Maven+Pro:500&subset=latin,latin-ext,vietnamese' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext,vietnamese' rel='stylesheet' type='text/css'>
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
+
+  <meta property="og:title" content="{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}" />
+  <meta name="twitter:title" content="{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}" />
+  {% if page.tags and page.tags.size > 0 %}
+  <meta name="keywords" content="{% for tag in page.tags %}{{ tag }}, {% endfor %}" />
+  {% elsif site.keywords %}
+  <meta name="keywords" content="{{ site.keywords }}" />
+  {% endif %}
+  <meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description | strip_newlines }}{% endif %}" />
+  <meta name="twitter:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description | strip_newlines }}{% endif %}" />
+  {% if page.title %}
+  <meta property="og:type" content="article" />
+  {% else %}
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}" />
+  {% endif %}
+  <meta property="og:site_name" content="{{ site.title }}" />
+  {% if page.cover %}
+  <meta property="og:image" content="/{{page.cover | replace:'http://','/' | replace:'https://','/'}}" />
+  <meta property="twitter:image" content="/{{page.cover | replace:'http://','/' | replace:'https://','/'}}" />
+  {% else %}
+  <meta name="og:image" content="{{ site.base_url }}/img/sharer.png" />
+  <meta name="twitter:image" content="{{ site.base_url }}/img/sharer.png" />
+  {% endif %}
+  <meta name="twitter:card" content="summary" />
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-78579525-3', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+<style class="cp-pen-styles">* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: white;
+  font-size: 1.3em;
+  color: #333;
+  font-family: 'Open Sans', sans-serif;
+}
+
+section {
+  float: left;
+  width: 100%;
+  background: #fff;
+  position: relative;
+  box-shadow: 0 0 5px 0px #333;
+  -webkit-animation: fadein-header 2s cubic-bezier(0.3,1,0,1);
+	animation: fadein-header 2s cubic-bezier(0.3,1,0,1);
+	-webkit-animation-name: fadein-header;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: cubic-bezier(0.3,1,0,1);
+}
+
+
+/* the important styles */
+
+.arrow-wrap {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: -5em;
+  margin-left: -5em;
+  background: #111;
+  width: 10em;
+  height: 10em;
+  padding: 4em 2em;
+  border-radius: 50%;
+  font-size: 0.5em;
+  display: block;
+  box-shadow: 0px 0px 5px 0px #333;
+    -webkit-animation: fadeInFromNone 3s cubic-bezier(0.3,1,0,1);
+	animation: fadeInFromNone 3s cubic-bezier(0.3,1,0,1);
+	-webkit-animation-name: fadeInFromNone;
+	-webkit-animation-duration: 3s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: cubic-bezier(0.3,1,0,1);
+}
+
+.arrow {
+  float: left;
+  position: relative;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 3em 3em 0 3em;
+  border-color: #ffffff transparent transparent transparent;
+  -webkit-transform: rotate(360deg)
+}
+
+.arrow:after {
+  content: '';
+  position: absolute;
+  top: -3.2em;
+  left: -3em;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 3em 3em 0 3em;
+  border-color: #111 transparent transparent transparent;
+  -webkit-transform: rotate(360deg)
+}
+
+.hint {
+  position: absolute;
+  top: 0.6em;
+  width: 100%;
+  left: 0;
+  font-size: 2em;
+  font-style: italic;
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+}
+
+.arrow-wrap:hover .hint {
+  opacity: 1;
+}
+
+@-webkit-keyframes arrows {
+  0% {
+    top: 0;
+  }
+  10% {
+    top: 12%;
+  }
+  20% {
+    top: 0;
+  }
+  30% {
+    top: 12%;
+  }
+  40% {
+    top: -12%;
+  }
+  50% {
+    top: 12%;
+  }
+  60% {
+    top: 0;
+  }
+  70% {
+    top: 12%;
+  }
+  80% {
+    top: -12%;
+  }
+  90% {
+    top: 12%;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+.arrow-wrap .arrow {
+  -webkit-animation: arrows 2.8s 0.4s;
+  -webkit-animation-delay: 3s;
+}
+
+
+/*  this is the unimportant CSS used just to layout the content  */
+
+.img-cover {
+  -webkit-animation: fadein 2s cubic-bezier(0.3,1,0,1);
+	animation: fadein 2s cubic-bezier(0.3,1,0,1);
+	-webkit-animation-name: fadein;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: cubic-bezier(0.3,1,0,1);
+}
+
+header {
+  float: left;
+  width: 100%;
+  color: #fff;
+  height: calc(75% - 3em);
+}
+
+header h1 {
+  margin: 0;
+}
+
+header h3 {
+  margin: 0;
+  color: #56dcee;
+}
+
+header a {
+  color: #56dcee;
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+header a:hover {
+  color: #333;
+  opacity: 1;
+}
+
+.content {
+  float: left;
+  width: 70%;
+  margin: 0 15%;
+  padding: 2em 0;
+}
+
+h1 {
+  font-family: 'Maven Pro', sans-serif;
+  font-weight: 300;
+  font-size: 2.4em;
+}
+
+h2,
+h3 {
+  font-family: 'Maven Pro', sans-serif;
+  font-weight: 300;
+  font-size: 1.5em;
+  margin-top: 2em;
+}
+
+pre {
+  background: #ededed;
+  padding: 1em;
+}
+
+p {
+  color: #555;
+  font-size: 0.9em;
+}
+
+p a {
+  color: #14b5d1;
+  text-decoration: none;
+}
+
+img {
+	width:100%;
+	position:relative;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+@keyframes fadein-header {
+    0% { transform: translate(0vw, 100vh); opacity: 0; }
+    1% { transform: translate(0vw, 100vh); opacity: 0; }
+    100%   { transform: translate(0vw, 0vh); opacity: 1; }
+}
+
+@-webkit-keyframes fadein-header {
+    0% { -webkit-transform: translate(0vw, 100vh); opacity: 0;	}
+    1% { -webkit-transform: translate(0vw, 100vh); opacity: 0;	}
+    100%   { -webkit-transform: translate(0vw, 0vh); opacity: 1; }
+}
+
+@keyframes fadein {
+    0% { transform: translate(0vw, -100vh); opacity: 0; }
+    1% { transform: translate(0vw, -100vh); opacity: 0; }
+    100%   { transform: translate(0vw, 0vh); opacity: 1; }
+}
+
+@-webkit-keyframes fadein {
+    0% { -webkit-transform: translate(0vw, -100vh); opacity: 0;	}
+    1% { -webkit-transform: translate(0vw, -100vh); opacity: 0;	}
+    100%   { -webkit-transform: translate(0vw, 0vh); opacity: 1; }
+}
+
+@keyframes fadeInFromNone {
+    0% {transform: scale(0.1);}
+    1% {transform: scale(0.1);}
+    100% {transform: scale(1);}
+}
+
+@-webkit-keyframes fadeInFromNone {
+    0% {-webkit-transform: scale(0.1);}
+    1% {-webkit-transform: scale(0.1);}
+    100% {-webkit-transform: scale(1);}
+}
+
+</style></head><body>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans|Maven+Pro:500' rel='stylesheet' type='text/css'>
+
+<header>
+<div class="img-cover" style="{% if page.cover %}background:url({{page.cover}}) no-repeat center center; background-size: cover;{% else %}background-color: #14b5d1;{% endif %}width:100%; height:100%; position:absolute; z-index:-2; margin:0; padding:0;"></div>
+<div style="background-color:rgba(0,0,0,0.35);width:100%; height:100%; position:absolute; z-index:-1; margin:0; padding:0;"></div>
+  {% if page.cover %}<div class="img-overlay"></div>{% endif %}
+  <div style="padding: 2em 4em;">
+  <h1>VOGE</h1>
+  <h3 style="color:white; a:link, a:visited, a:hover, a:active {color:white}">
+    <a href="/" style="color:white;">&#9664; Về trang chủ</a>
+  </h3>
   </div>
-</div>
+</header>
 
-<div class='divider xs-12 topBarTrigger'></div>
 
-<div class='post-wrap'>
-  <h1>{{ page.title }}</h1>
-  <p class='meta'>
-    {{ page.author }} // {{ page.date | date_to_long_string }}
-  </p>
-
-  {{ content }}
-
-</div>
+<section class="main">
+<a class="arrow-wrap" href="#content">
+<span class="arrow"></span>
+<!--<span class="hint">scroll</span>-->
+</a>
+  
+  <div class="content" id="content">
+  
+	<h1>{{ page.title }}</h1>
+	Ngày viết: {{ page.date | date: "%-d tháng %-m, %Y" }}</br>
+	{% if post.tags %}
+	Tags: 
+        {% for tag in post.tags %}
+            <a href="/tag/#{{ tag }}"><font style="background-color:#ddd">&nbsp{{ tag }}&nbsp</font></a>&nbsp
+        {% endfor %}
+		</br>
+    {% endif %}
+	Chia sẻ qua: <a class="sh-fb" href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+window.location.href,'_blank','height=300,width=600');return false;"><font style="color:white; background-color:#3b5998">&nbspfacebook&nbsp</font></a>&nbsp&nbsp
+	{% if site.twitter %}
+		<a class="sh-fb" href="#" target="_blank" onclick="window.open('https://twitter.com/share?url='+window.location.href+'&via={{ site.twitter }}','_blank','height=300,width=600');return false;"><font style="color:white; background-color:#00aced">&nbsptwitter&nbsp</font></a>&nbsp&nbsp
+	{% else %}
+		<a class="sh-fb" href="#" target="_blank" onclick="window.open('https://twitter.com/share?url='+window.location.href,'_blank','height=300,width=600');return false;"><font style="color:white; background-color:#00aced">&nbsptwitter&nbsp</font></a>&nbsp&nbsp
+	{% endif %}
+	<a class="sh-fb" href="#" target="_blank" onclick="window.open('https://plus.google.com/share?url='+window.location.href,'_blank','height=300,width=600');return false;"><font style="color:white; background-color:#d34836">&nbspgoogle+&nbsp</font></a>&nbsp&nbsp
+	</br></br>
+	<div style="height:2px; width:5em; background-color:black"></div></br>
+  
+	{{ content }}
+	
+	</br>
+	<p>
+		{% if page.next.url %}
+			Bài tiếp theo: <a class="next" href="{{page.next.url}}">{{page.next.title}}</a></br>
+		{% endif %}
+		{% if page.previous.url %}
+			Bài trước: <a class="prev" href="{{page.previous.url}}">{{page.previous.title}}</a>
+		{% endif %}
+	</p>
+  </div>
+  
+</section>
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script>$(window).scroll(function () {
+    var topWindow = $(window).scrollTop();
+    var topWindow = topWindow * 1.5;
+    var windowHeight = $(window).height();
+    var position = topWindow / windowHeight;
+    position = 1 - position;
+    $('.arrow-wrap').css('opacity', position);
+});
+$(function () {
+    $('a[href*=#]:not([href=#])').click(function () {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+                $('html,body').animate({ scrollTop: target.offset().top }, 1000);
+                return false;
+            }
+        }
+    });
+});
+//# sourceURL=pen.js
+</script>
+</body></html>

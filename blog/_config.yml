@@ -1,0 +1,33 @@
+# Site settings
+## Change the values as needed.
+title: VOGE - Vietnam Organization for Gender Equity
+email: info.voge@gmail.com
+description: "Tổ chức Thúc đẩy Bình đẳng giới Việt Nam tin tưởng vào tầm nhìn về một xã hội bình đẳng nơi giới tính không phải giới hạn."
+keywords: "voge"
+#url: "http://bitwiser.in/bitwiser-material" # the base hostname & protocol for your site
+url: "//vogeorg.github.io" # the base hostname & protocol for your site
+baseurl: "blog" # the subpath of your site, e.g. /blog/
+paginate: 5
+paginate_path: "page:num"
+# Build settings
+markdown: kramdown
+highlighter: rouge
+sass:
+  sass_dir: _sass
+  style: :compressed
+links:
+  facebook: voge.org
+  #twitter: brijeshb42
+  email: info.voge@gmail.com
+  #github: brijeshb42/bitwiser-material/
+exclude:
+  - bower_components
+  - README.md
+full_name: Brijesh
+
+##set this to enable disqus commenting
+#disqus: bitwiser
+
+##set this to enable google analytics
+#ga_id: analyticsID
+#ga_domain: bitwiser.in

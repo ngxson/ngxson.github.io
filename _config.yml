@@ -7,8 +7,11 @@ exclude: ["node_modules", "gulpfile.js", "package.json"]
 # Jekyll Defaults
 title: Nui Blog
 email: thichthat@gmail.com
-description: Blog cá nhân của Nui
+description: "Blog cá nhân của Nui"
 baseurl: "/blog"
+paginate: 5
+paginate_path: "page:num"
+keywords: "voge"
 # the subpath of your site, e.g. /blog
 
 # Site settings
@@ -17,13 +20,18 @@ email:       thichthat@gmail.com
 url: "https://ngxson.github.io/blog"
 relative_permalinks: false
 
-# When developing, set this ^ equal to whatever localhost you're using
+sass:
+  sass_dir: _sass
+  style: :compressed
+links:
+  facebook: voge.org
+  #twitter: brijeshb42
+  email: info.voge@gmail.com
+  #github: brijeshb42/bitwiser-material/
+exclude:
+  - bower_components
+  - README.md
+full_name: Brijesh
 
-# Socail Media links
-# Use these to link users to your organization's social media sites
-twitter:
-facebook: ngxson
-google:
-
-author: Nui Nui
-authorBio: Trời tính không bằng máy tính
+author: "Nui Nui"
+authorBio: "Trời tính không bằng máy tính"

@@ -1,0 +1,164 @@
+
+<!DOCTYPE html><html class=''>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta charset='UTF-8'>
+<title>Admin: VOGE</title>
+<style class="cp-pen-styles">#main {
+  padding:5px
+}
+body {
+  padding:2px
+}
+h1, h2,h3,h4,h5,h6,p{margin:0;padding:0;display:inline-block}
+#pytab {
+  margin-bottom:4px
+}
+#editor {
+  min-height: 250px;
+}
+img{
+	height:250px;
+}
+</style></head><body>
+<ul class="nav nav-tabs" role="tablist" id="pytab">
+ 
+  <li class="active"><a href="#">Editor</a></li>
+  <li><a href="https://github.com/vogeorg/vogeorg.github.io/tree/master/_posts" target="_blank">List of posts</a></li>
+  <li><a href="https://github.com/login" target="_blank">Login page</a></li>
+  <li><a href="https://facebook.com/ngxson" target="_blank">Contact developer</a></li>
+</ul>
+<div id="main">
+Title:</br>
+<textarea id="myname" rows="1" style="width:100%"></textarea></br>
+Tag:</br>
+<textarea id="mytag" rows="1" style="width:100%"></textarea></br>
+Cover image URL:</br>
+<textarea id="mycover" rows="1" style="width:100%"></textarea></br>
+<div class="panel panel-default">
+  <div class="panel-heading">
+<!--span class="btn-group">
+  <button class="btn btn-primary" data-toggle="dropdown" onclick="if(document.execCommand('increaseFontSize', false, null) == false) {addHTML('big')}"><strong>A</strong><i class="glyphicon glyphicon-arrow-up"></i></button>
+  <button class="btn btn-primary" data-toggle="dropdown" onclick="if(document.execCommand('decreaseFontSize', false, null) == false) {addHTML('small')}"><strong>A</strong><i class="glyphicon glyphicon-arrow-down"></i></button>
+</span-->
+<span class="btn-group">
+<button onClick="document.execCommand('bold', false, null)" title="Bold (CTRL+B)" class="btn btn-primary"><strong>B</strong></button>
+<button onClick="document.execCommand('italic', false, null)" title="Italic (CTRL+I)" class="btn btn-primary"><em>I</em></button>
+  <button onClick="document.execCommand('underline', false, null)" title="Underline (CTRL+I)" class="btn btn-primary"><u>U</u></button>
+  <button class="btn btn-primary" onclick="image()"><img style="height:15px;" src="picture-xxl.png" alt="add picture" width="15" height="15"></button>
+  <button class="btn btn-primary" onclick="link()"><img style="height:15px;" src="add-link-64.png" alt="add link" width="15" height="15"></button>
+  <!--a class="btn btn-right btn-danger" onClick="document.getElementById('editor').innerHTML='<br>'"><strong>&times;</strong></a-->
+    </span></div>
+  <div contenteditable="true" id="editor" class="panel-body" placeholder="hello">
+  </div>
+  </div>
+  <button id="exportmd" onclick="updateHTML();">Export to md</button></br>-----------------</br>
+  File name:</br>
+  <textarea id="resname" rows="1" style="width:100%"></textarea>
+  Content:<button id="copyBlock">Copy to clipboard</button> <b><span id="copyAnswer"></span></b>&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/vogeorg/vogeorg.github.io/new/master/_posts" target="_blank">Create new post now</a>
+  <textarea id="res" rows="12" style="width:100%"></textarea></div>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<script class="cssdeck" src="jquery.min.js"></script>
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<script>
+//$(".btn").click($(".btn").click()+$('#res').text(function(){$('#editor').html()}))
+var textarea = document.getElementById("res");
+function updateHTML() {
+	var date = new Date();
+	var mydate = date.getFullYear() + "-" + mintd(date.getMonth()+1) + "-" + mintd(date.getDate());
+	var mytime = mintd(date.getHours()) + ":" + mintd(date.getMinutes()) + ":" + mintd(date.getSeconds());
+
+	document.getElementById("resname").value = mydate+"-"+getname(document.getElementById("myname").value) + ".md";
+	//$('#res').text($('#editor').html());
+	textarea.value=$('#editor').html();
+	var reg = new RegExp("style=\"(.*)\"", "g");
+	textarea.value=textarea.value.replace(reg,"style=\"\"");
+	textarea.value=textarea.value.replace(/(\r\n|\n|\r)/gm," ");
+	textarea.value=textarea.value.replace(new RegExp('<o:p></o:p>', 'g')," ");
+	//insert header
+	textarea.value="---\nlayout: post\ncolor: blue\ncover: '"+document.getElementById("mycover").value+
+		"'\ntitle:  '"+document.getElementById("myname").value+
+		"'\ndate: "+mydate+" "+mytime+
+		"\ntags: "+ document.getElementById("mytag").value+
+		"\n---\n"
+		+textarea.value;
+}
+
+function getname(str) {
+  str = str.toLowerCase();
+
+  str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
+  str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');
+  str = str.replace(/ì|í|ị|ỉ|ĩ/g, 'i');
+  str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o');
+  str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u');
+  str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y');
+  str = str.replace(/đ/g, 'd');
+  str = str.replace(/[^a-zA-Z ]/g, "");
+  str = str.replace(/\s+/g, '-');
+
+  return str;
+}
+
+function addHTML(tag) {
+var selection = window.getSelection();
+var range = selection.getRangeAt(0);
+var strong = document.createElement(tag);
+range.surroundContents(strong);
+$("#editor").focus()
+};
+
+function image() {
+  var url=prompt("Enter the URL of the image to insert");
+  document.execCommand('insertImage', false, url)
+}
+
+function link() {
+  var url=prompt("Enter the URL to insert");
+  var selection = document.getSelection();
+  document.execCommand('createLink', true, url);
+  selection.anchorNode.parentElement.target = '_blank';
+}
+
+//$(document).on('keyup',function(){$('#res').text($('#editor').html())})
+//$(document).on('click',function(){$('#res').text($('#editor').html())})
+/*$(".panel-default .panel-heading .btn-group .btn").on('click',
+	function(){
+		//$('#editor').$('span').remove();
+		//$('div.panel-body').find('*').removeAttr('style');
+		//var mytext = $('#editor').html();
+		//var pattern = new RegExp("[...]");
+		//mytext.replace(pattern, "nui");
+		//$('#res').text(mytext);
+		//$('#res').text($('#editor').html());
+	})*/
+
+	
+// setup the varriables
+var answer = document.getElementById("copyAnswer");
+var copy   = document.getElementById("copyBlock");
+copy.addEventListener('click', function(e) {
+	//document.getElementById("res").value=(document.getElementById("res").value).replace(/\yle=\u0022[^\u0022]*\u0022\s*/g, 'yle=""');
+   textarea.select(); 
+   try {
+       var successful = document.execCommand('copy');
+       if(successful) answer.innerHTML = '<font style="color:blue">Copied!</font>';
+       else answer.innerHTML = '<font style="color:red">Unable to copy!</font>';
+   } catch (err) {
+       answer.innerHTML = '<font style="color:red">Unsupported Browser!</font>';
+   }
+});
+
+function mintd(n) {
+  return (n < 10 ? '0' : '') + n;
+}
+//# sourceURL=pen.js
+</script>
+</body></html>

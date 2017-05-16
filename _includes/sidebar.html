@@ -1,0 +1,33 @@
+<div class="mui-col-md-4">
+  <div class="mui-panel">
+    <h2>Thông tin</h2>
+    <ul class="about-links">
+        <li><a href="/2016/07/01/about.html" class="mui-btn">Giới thiệu</a></li>
+    </ul>
+    <h2>Liên lạc</h2>
+    <ul class="about-links">
+        {% if site.links.github %}
+            <li><a href="https://github.com/{{ site.links.github }}" target="_blank" class="mui-btn"><i class="fa fa-github"></i>Github</a></li>
+        {% endif %}
+        {% if site.links.twitter %}
+            <li><a href="https://twitter.com/{{ site.links.twitter }}" target="_blank" class="mui-btn "><i class="fa fa-twitter"></i>Twitter</a></li>
+        {% endif %}
+        {% if site.links.facebook %}
+            <li><a href="https://www.facebook.com/{{ site.links.facebook }}" target="_blank" class="mui-btn"><i class="fa fa-facebook"></i>Facebook</a></li>
+        {% endif %}
+        {% if site.links.email %}
+            <li><a href="mailto:{{ site.links.email }}" class="mui-btn"><i class="fa fa-envelope"></i>Mail</a></li>
+        {% endif %}
+    </ul>
+	<h2>Tag Cloud</h2>
+		{% assign tags = site.tags | sort %}
+		{% for tag in tags %}
+		<span class="site-tag">
+			<a href="/tag/#{{ tag | first | slugify }}/"
+				style="font-size: {{ tag | last | size  |  times: 4 | plus: 80  }}%">
+					{{ tag[0] | replace:'-', ' ' }} ({{ tag | last | size }})
+			</a>
+		</span>
+		{% endfor %}
+  </div>
+</div>
