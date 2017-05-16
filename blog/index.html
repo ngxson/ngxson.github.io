@@ -6,7 +6,7 @@ layout: default
 {% for post in paginator.posts %}
 {% if forloop.index == 1 %}
 <div class="mui-col-md-12">
-{% else %}
+{% elsif forloop.index == 2 or forloop.index == 4 %}
 <div class="mui-col-md-6">
 {% endif %}
     <article class="mui-panel-post">
@@ -31,7 +31,9 @@ layout: default
         {% endif %}
       </div>
     </article>
+{% if forloop.index == 1 or forloop.index == 2 or forloop.index == 4 %}
 </div>
+{% endif %}
 {% endfor %}
   <div class="mui-col-md-12">
   <div class="paginator">

@@ -78,8 +78,9 @@ function updateHTML() {
 	document.getElementById("resname").value = mydate+"-"+getname(document.getElementById("myname").value) + ".md";
 	//$('#res').text($('#editor').html());
 	textarea.value=$('#editor').html();
-	var reg = new RegExp("style=\"(.*)\"", "g");
-	textarea.value=textarea.value.replace(reg,"style=\"\"");
+	textarea.value=textarea.value.replace(/style=\"[^\"]*\"/g,"style=\"\"");
+	textarea.value=textarea.value.replace(/id=\"[^\"]*\"/g," ");
+	textarea.value=textarea.value.replace(/dir=\"[^\"]*\"/g," ");
 	textarea.value=textarea.value.replace(/(\r\n|\n|\r)/gm," ");
 	textarea.value=textarea.value.replace(new RegExp('<o:p></o:p>', 'g')," ");
 	//insert header
