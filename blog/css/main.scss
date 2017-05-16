@@ -49,13 +49,14 @@ i.fa {
     background-color: mui-color("indigo", "500");
     left: 0;
     margin-bottom: 15px;
-    overflow: auto;
+    overflow: hidden;
     padding-left: 10px;
     padding-top: 10px;
     position: fixed;
     right: 0;
     top: 0;
     z-index: 6;
+	transition: all 0.3s ease;
 }
 
 .site-nav {
