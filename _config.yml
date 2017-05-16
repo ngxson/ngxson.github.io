@@ -8,13 +8,13 @@ exclude: ["node_modules", "gulpfile.js", "package.json"]
 title: Nui Blog
 email: thichthat@gmail.com
 description: Blog cá nhân của Nui
-baseurl: "https://ngxson.github.io/blog"
+baseurl: "/blog"
 # the subpath of your site, e.g. /blog
 
 # Site settings
 title:       Nui
 email:       thichthat@gmail.com
-url: "https://ngxson.github.io/blog"
+url: "https://ngxson.github.io"
 relative_permalinks: false
 
 # When developing, set this ^ equal to whatever localhost you're using
