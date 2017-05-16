@@ -1,6 +1,6 @@
 # Default, Defaults
 # markdown: redcarpet
-highlighter: pygments
+# highlighter: pygments
 # or rouge or null
 exclude: ["node_modules", "gulpfile.js", "package.json"]
 

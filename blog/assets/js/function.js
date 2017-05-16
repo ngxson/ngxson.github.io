@@ -2,8 +2,11 @@
 $(function() {
   $(window).scroll(function() {
     var scroll = $(this).scrollTop();
+	
+	var offsetTop = $('.topBarTrigger').offset();
+	if (!offsetTop) return;
 
-    if (scroll >= $('.topBarTrigger').offset().top) {
+    if (scroll >= offsetTop.top) {
         $('.topBar').removeClass('hidden');
     } else {
         $('.topBar').addClass('hidden');
