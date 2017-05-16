@@ -1,8 +1,29 @@
+# Default, Defaults
+markdown: redcarpet
+highlighter: pygments
+# or rouge or null
+exclude: ["node_modules", "gulpfile.js", "package.json"]
+
+# Jekyll Defaults
+title: Nui Blog
+email: thichthat@gmail.com
+description: Blog cá nhân của Nui
+baseurl: "https://ngxson.github.io/blog"
+# the subpath of your site, e.g. /blog
+
 # Site settings
 title:       Nui
 email:       thichthat@gmail.com
-author:      Nui Nui
-description: ""
-baseurl:     ""
-url: "http://ngxson.github.io"
+url: "https://ngxson.github.io/blog"
 relative_permalinks: false
+
+# When developing, set this ^ equal to whatever localhost you're using
+
+# Socail Media links
+# Use these to link users to your organization's social media sites
+twitter:
+facebook: ngxson
+google:
+
+author: Nui Nui
+authorBio: Trời tính không bằng máy tính
