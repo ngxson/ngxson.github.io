@@ -15,7 +15,7 @@ keywords: "voge"
 # the subpath of your site, e.g. /blog
 
 # Site settings
-title:       Nui
+title:       Nui Blog
 email:       thichthat@gmail.com
 url: "https://ngxson.github.io"
 relative_permalinks: false
