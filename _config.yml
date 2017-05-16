@@ -17,7 +17,7 @@ keywords: "voge"
 # Site settings
 title:       Nui
 email:       thichthat@gmail.com
-url: "https://ngxson.github.io/blog"
+url: "https://ngxson.github.io"
 relative_permalinks: false
 
 sass:
