@@ -14,7 +14,7 @@ baseurl: "/blog"
 # Site settings
 title:       Nui
 email:       thichthat@gmail.com
-url: "https://ngxson.github.io"
+url: "https://ngxson.github.io/blog"
 relative_permalinks: false
 
 # When developing, set this ^ equal to whatever localhost you're using
