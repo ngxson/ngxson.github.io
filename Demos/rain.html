@@ -1,0 +1,135 @@
+
+<!DOCTYPE html><html class=''>
+<head><meta charset='UTF-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext,vietnamese" rel="stylesheet">
+<link href="button.css" rel="stylesheet">
+<style class="cp-pen-styles">
+html{height:100%;}
+body {
+font-family: 'Open Sans', sans-serif;
+color: #444444;
+font-size: 20px;
+background:#d0d0d0;
+margin: 0 0;
+overflow:hidden;}
+
+
+.drop {
+	background:-webkit-gradient(linear,0% 0%,0% 100%, from(rgba(255,255,255,1) ), to(rgba(255,255,255,0.6))	);
+	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,.6) 100%);
+	width:1px;
+	height:89px;
+	position: absolute;
+	bottom:200px;
+	-webkit-animation: fall 1s linear infinite;
+	-moz-animation: fall 1s linear infinite;
+	
+}
+
+/* animate the drops*/
+@-webkit-keyframes fall {
+	to {margin-top:900px;}
+}
+@-moz-keyframes fall {
+	to {margin-top:900px;}
+}
+
+.content {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -48%);
+	width: 520px;
+}
+
+.footer {
+	position: fixed;
+	bottom: 10px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	width: 500px;
+	font-size: 12px;
+}
+
+@media screen and (max-width: 480px) {
+	.content {
+		width: 80%;
+	}
+}
+
+</style></head><body>
+<img id="cloud1" src="clouds.png" style="position: fixed; right:0px; height: 15%;"/>
+<img id="cloud2" src="clouds.png" style="position: fixed; left:0px; height: 15%;"/>
+<div class="content" id="content"><center>
+	<img src="logo1.png" style="width: 100%; padding-bottom: 20px;"/>
+	<font id="quote"></font><br/>
+	<a id="mbutton" class="custom button" onclick="next();">3</a>
+</center></div>
+
+<div class="footer"><center>
+	By <b>#ChatbotCNH</b> and <b>#MUC17</b>
+</center></div>
+<section class="rain" id="rain"></section>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script>
+
+var words = ['3','2','1','0'];
+var quotes = ["Thời gian trôi qua, những gì ngày ấy tưởng chừng như rất đỗi bình thường giờ lại không thể lấy lại được nữa...",
+"Tuổi trẻ là thứ mà ai cũng muốn níu giữ, cũng muốn quay trở về... nhưng lại không thể...",
+"Một khi đã bước chân ra khỏi cánh cổng trường, tôi và bạn sẽ chẳng còn gì ngoài hồi ức...",
+"Tuổi trẻ có thể có lúc thăng lúc trầm, khi hạnh phúc, khi khó khăn, chông gai nhưng tuyệt đối không bao giờ được chùn bước, không bao giờ được từ bỏ."
+];
+var wcount = 0;
+$('#quote').html(quotes[0]);
+function next() {
+	wcount++;
+	if (wcount >= words.length) {
+		goToMagic();
+	} else {
+		$('#quote').fadeOut(1000);
+		setTimeout(function() {
+			$('#quote').html(quotes[wcount]);
+			$('#quote').fadeIn(1000);
+		},1000);
+		$('#mbutton').text(words[wcount]);
+	}
+}
+
+function goToMagic() {
+	$('#cloud1').fadeOut(2000);
+	$('#cloud2').fadeOut(2000);
+	$('#content').fadeOut(2000);
+	setTimeout(function() {
+		$('#content').html("<center><h1>Dành riêng cho K67</h1></center>");
+		$('#content').fadeIn(2000);
+		setTimeout(function() {$('#content').fadeOut(2000);}, 3000);
+		setTimeout(function() {window.location.href = 'photos.html';}, 6000);
+	}, 3000);
+}
+
+// number of drops created.
+var nbDrop = 500; 
+
+// function to generate a random number range.
+function randRange( minNum, maxNum) {
+  return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
+}
+
+// function to generate drops
+function createRain() {
+
+	for( i=1;i<nbDrop;i++) {
+	var dropLeft = randRange(0,1600);
+	var dropTop = randRange(-1000,1400);
+
+	$('.rain').append('<div class="drop" id="drop'+i+'"></div>');
+	$('#drop'+i).css('left',dropLeft);
+	$('#drop'+i).css('top',dropTop);
+	}
+
+}
+// Make it rain
+createRain();
+</script>
+</body></html>

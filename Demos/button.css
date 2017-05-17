@@ -1,0 +1,51 @@
+
+a.custom {
+	-webkit-transition: all 500ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-moz-transition: all 500ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-ms-transition: all 500ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-o-transition: all 500ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	transition: all 500ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	display: block;
+	margin: 15px auto;
+	width: 100px;
+	text-decoration: none;
+	border-radius: 4px;
+	padding: 8px 8px;
+	font-size: 0.8em;
+	cursor:pointer;
+}
+
+a.custom-red {
+	width: 80%;
+	font-size: 1.2em;
+}
+
+a.button {
+	color: rgba(0, 0, 0, 1);
+	box-shadow: rgba(0, 0, 0, 1) 0 0px 0px 2px inset;
+}
+
+a.button:hover {
+	color: rgba(255, 255, 255, 0.85);
+	box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 40px inset;
+}
+
+a.button-danger {
+	color: rgba(180, 0, 0, 1);
+	box-shadow: rgba(180, 0, 0, 1) 0 0px 0px 2px inset;
+}
+
+a.button-danger:hover {
+	color: rgba(255, 255, 255, 0.85);
+	box-shadow: rgba(180, 0, 0, 1) 0 0px 0px 40px inset;
+}
+
+a.button2 {
+	color: rgba(0, 0, 0, 1);
+	box-shadow: rgba(0, 0, 0, 1) 0 0px 0px 2px inset;
+}
+
+a.button2:hover {
+	color: rgba(255, 255, 255, 0.85);
+	box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
+}
