@@ -122,12 +122,12 @@ function loadImgs() {
 	setTimeout(function() {
 		collage('.Collage'+loadCount);
 		loadCount++;
-	}, 500);
+	}, 1000);
 }
 
 $(window).load(function () {
     $(document).ready(function(){
-        loadImgs();
+        setInterval(function() {loadImgs();}, 2000);
     });
 });
 
