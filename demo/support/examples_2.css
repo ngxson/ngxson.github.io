@@ -140,6 +140,13 @@ a.button2:hover {
 	box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
 }
 
+.loading {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -48%);
+	width: 520px;
+}
 
 
 /* In this example, this is the main item being resized */

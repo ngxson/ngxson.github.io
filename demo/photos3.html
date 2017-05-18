@@ -12,6 +12,9 @@
 		From <b>#ChatbotCNH</b> and <b>#MUC17</b> with ♥<br/><br/>
 		</center>
     </header>
+<div class="loading" id="loading" style="display:none"><center>
+	<img src="loading.gif" height="100px"/>
+</center></div>
 
 <div class="m-p-g" id="allImages">
 	<div class="m-p-g__thumbs" data-google-image-layout data-max-height="350">
@@ -28,6 +31,7 @@
 <script src='material-photo-gallery.js'></script>
 <script src="jquery.waitforimages.js"></script>
 <script>
+$('#loading').fadeIn(1000);
 var gallery;
 	var elem = document.querySelector('.m-p-g');
 
