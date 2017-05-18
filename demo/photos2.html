@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
-    <title>CollagePlus for jQuery Example</title>
+    <title>K67 CNH PhotoBook</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="support/examples.css" media="all" />
@@ -12,11 +12,11 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <![endif]-->
     <!--[if (gte IE 9) | (!IE)]><!-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <!--<![endif]-->
 
     <!--[if IE]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
     <script src="jquery.collagePlus.js"></script>
@@ -29,15 +29,15 @@
     // we end up waiting for the whole window to load in this example
     $(window).load(function () {
         $(document).ready(function(){
-            collage();
-            $('.Collage').collageCaption();
+            //collage('.Collage');
+            //$('.Collage').collageCaption();
         });
     });
 
 
     // Here we apply the actual CollagePlus plugin
-    function collage() {
-        $('.Collage').removeWhitespace().collagePlus(
+    function collage(id) {
+        $(id).removeWhitespace().collagePlus(
             {
                 'fadeSpeed'     : 1200,
                 'targetHeight'  : 300,
@@ -62,17 +62,16 @@
 	<style>
 		img {
 			/*height:300px;*/
-			height:300px;
 		}
 		
 		.Image_Wrapper {
-			height:300px;
+			/*max-height:300px;*/
 		}
 	</style>
 </head>
 <body>
 
-<img id="cloud1" src="clouds.png" style="height: 80px; float: right"/><br/>
+<img id="cloud1" src="clouds.png" style="height: 80px; float: right; padding: 0px;border: none;"/><br/>
 
     <header class="header"><br/>
         <center><h1>CNH K67 PhotoBook</h1><br/>
@@ -80,47 +79,77 @@
 		</center>
     </header>
 
-<section class="Collage effect-parent" id="gallery">
-	<div class="Image_Wrapper"><img src="img/10.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/9.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/8.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/7.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/6.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/5.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/4.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/3.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/2.jpg"/></div>
+<div id="allImages">
+<!--section class="Collage effect-parent">
 	<div class="Image_Wrapper"><img src="img/1.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/10.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/9.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/8.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/7.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/6.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/5.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/4.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/3.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/2.jpg"/></div>
-	<div class="Image_Wrapper"><img src="img/1.jpg"/></div>
-</section>
+</section-->
+</div>
 
 <script>
-var imgCount = 1;
+var MAXIMG = 153;
+var imgCount = 0;
+var loadCount = 0;
 $(window).scroll(function() {
 	if($(window).scrollTop() + $(window).height() > $(document).height() - 50) {
-		$.each($('.Image_Wrapper'),function(i,e){e.removeAttribute('style')});
-		var htmlToInject = $('#gallery').html();
-		for (var i=0 ; i<20 ; i++) {
-			htmlToInject += '<div class=\"Image_Wrapper\"><img src=\"img/' + imgCount + '.jpg"></div>';
-			if (imgCount >= 100) imgCount = 1;
-			else imgCount++;
-		}
-		$('#gallery').html(htmlToInject);
-		setTimeout(collage, 200);
-		//$('.Collage').collageCaption();
+		loadImgs();
 	}
 });
+var isEnded = false;
+var imgsArr = [];
+for (var n=0 ; n<MAXIMG ; n++) {
+	imgsArr[n] = n;
+}
+imgsArr = shuffle(imgsArr);
+
+function loadImgs() {
+	//$.each($('.Image_Wrapper'),function(i,e){e.removeAttribute('style')});
+	var htmlToInject = $('#allImages').html();
+	htmlToInject += "<section class=\"Collage"+loadCount+" effect-parent\" style=\"padding:10px;\">";
+	for (var i=0 ; i<25 ; i++) {
+		if (imgCount >= MAXIMG) {
+			isEnded = true;
+			break;
+		}
+		htmlToInject += '<div class=\"Image_Wrapper\"><img src=\"img/' + imgsArr[imgCount] + '.jpg"></div>';
+		imgCount++;
+	}
+	if (isEnded) {
+		$('#footnote').html("Hãy đóng góp thêm nhiều ảnh bằng cách gửi qua inbox fanpage <b>MUC17</b> cho chúng mình nhé!<br/><br/>Cảm ơn bạn!<br/><br/><br/>");
+		return;
+	}
+	htmlToInject += "</section>";
+	$('#allImages').html(htmlToInject);
+	setTimeout(function() {
+		collage('.Collage'+loadCount);
+		loadCount++;
+	}, 500);
+}
+
+$(window).load(function () {
+    $(document).ready(function(){
+        loadImgs();
+    });
+});
+
+function shuffle(array) {
+    let counter = array.length;
+    while (counter > 0) {
+        let index = Math.floor(Math.random() * counter);
+        counter--;
+        let temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+    }
+    return array;
+}
+
+setInterval(function() {
+	for(var j=0 ; j<loadCount ; j++) {
+		collage('.Collage'+j);
+	}
+}, 1000);
 </script>
 
-    <p class="footnote"><a href="http://ed-lea.github.io/jquery-collagePlus/">CollagePlus</a> for jQuery by <a href="http://twitter.com/ed_lea">@ed_lea</a><br />Credits: Dynamic placeholder images by <a href="http://placehold.it/">http://placehold.it/</a> and colour schemes <a href="http://www.colourlovers.com/palette/92095/Giant_Goldfish">Giant Goldfish</a> and <a href="http://www.colourlovers.com/palette/694737/Thought_Provoking">Thought Provoking</a><br />Reveal Effects from <a href="http://tympanus.net/codrops/2013/07/02/loading-effects-for-grid-items-with-css-animations/">Codedrops</a></p>
+    <center><p id="footnote"></p></center>
 </body>
 </html>
