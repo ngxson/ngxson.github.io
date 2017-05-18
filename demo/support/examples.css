@@ -82,6 +82,7 @@ a.return:hover{
     font-size:12px;
 }
 .Collage{
+	max-width: 98%;
 
     /*This is where you set the padding you want between the images*/
     padding:10px;

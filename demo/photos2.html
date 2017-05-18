@@ -107,7 +107,7 @@
 var imgCount = 1;
 $(window).scroll(function() {
 	if($(window).scrollTop() + $(window).height() > $(document).height() - 50) {
-		//$.each($('.Image_Wrapper'),function(i,e){e.removeAttribute('style')});
+		$.each($('.Image_Wrapper'),function(i,e){e.removeAttribute('style')});
 		var htmlToInject = $('#gallery').html();
 		for (var i=0 ; i<20 ; i++) {
 			htmlToInject += '<div class=\"Image_Wrapper\"><img src=\"img/' + imgCount + '.jpg"></div>';
