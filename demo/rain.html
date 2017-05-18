@@ -70,7 +70,7 @@ overflow:hidden;}
 <div class="footer"><center>
 	By <b>#ChatbotCNH</b> and <b>#MUC17</b>
 </center></div>
-<section class="rain" id="rain"></section>
+<canvas id="canvas" width="800" height="500" style="z-index:10"></canvas>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script>
 
@@ -108,28 +108,197 @@ function goToMagic() {
 	}, 3000);
 }
 
-// number of drops created.
-var nbDrop = 500; 
+    var maxParticles = 120,
+	    numParticles = 0,
+        particles = [],
+        collisionDamper = 0.1;
 
-// function to generate a random number range.
-function randRange( minNum, maxNum) {
-  return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
-}
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
 
-// function to generate drops
-function createRain() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-	for( i=1;i<nbDrop;i++) {
-	var dropLeft = randRange(0,1600);
-	var dropTop = randRange(-1000,1400);
+    function particle() {
+    	var p = this;
+    	p.id = Date.now();
+    	p.removeParticle = false;
+    	p.setParticle = function(){
+	        p.position = {
+	            x: 10 + (Math.random() * (canvas.width - 10)),
+	            y: -10 - (Math.random() * 50),
+	            z: (Math.random() * 4)
+	        };
+	        p.velocity = {
+	            x: 0,
+	            y: 0
+	        };
+	        p.alpha = 1;
+	        p.length = 100;
+	        p.lineWidth = (1 - ((p.position.z / 1)))+2;
+	        p.acceleration = {
+	            x: 0,
+	            y: 0.6 - (p.position.z / 10)
+	        };
+	        if(p.removeParticle){
+	        	deleteParticle(p.id);
+        	}
+    	};
+    	p.setParticle();
+    }
 
-	$('.rain').append('<div class="drop" id="drop'+i+'"></div>');
-	$('#drop'+i).css('left',dropLeft);
-	$('#drop'+i).css('top',dropTop);
-	}
+    function newParticle() {
+        var curPart = new particle();
+        particles.push(curPart);
+    }
 
-}
-// Make it rain
+    function deleteParticle(id){
+    	for (var i = 0; i < particles.length; i++) {
+    		if(particles[i].id === id){
+    			particles[i].removed = true;
+    			particles.splice(i,1);
+    		}
+    	}
+    }
+
+    function deleteAllParticles(){
+    	for (var i = 0; i < particles.length; i++) {
+			particles.splice(i,1);
+    	}
+    }
+
+    function drawParticles() {
+        for (var i = 0; i < particles.length; i++) {
+            var position = particles[i].position;
+            ctx.strokeStyle = 'rgba(255,255,255,' + particles[i].alpha + ')';
+            ctx.lineWidth = particles[i].lineWidth;
+            ctx.beginPath();
+            ctx.moveTo(position.x, position.y);
+            ctx.lineTo(position.x, position.y + particles[i].length);
+            ctx.stroke();
+        }
+    }
+
+    function updateParticles() {
+        for (var i = 0; i < particles.length; i++) {
+
+        	// Update velocity (Acceleration)
+            particles[i].velocity.x += particles[i].acceleration.x;
+            particles[i].velocity.y += particles[i].acceleration.y;
+
+            // Update position based on velocity
+            particles[i].position.x += particles[i].velocity.x;
+            particles[i].position.y += particles[i].velocity.y;
+
+            // Check current position relative to floor
+            checkFloorCollision(i, particles[i].position.y);
+
+            if(particles[i]){
+
+	            // Check next position relative to floor
+	            var nextVy = particles[i].velocity.y + particles[i].acceleration.y;
+	            var nextPy = particles[i].position.y + particles[i].velocity.y;
+	            checkFloorCollision(i, nextPy);
+	        }
+
+	        if(particles[i]){
+	            // Update the length of the rain drop based on velocity
+	            particles[i].length = particles[i].velocity.y * 1.8;
+
+	            // The negative length gives the bounce effect, but it buggy, so this resets particles when the length is below -20
+	            if(particles[i].length <= -20){
+	            	particles[i].setParticle();
+	            }
+            }
+
+            if(particles[i] && particles[i].removed){
+            	particles.splice(i,1);
+            }
+        }
+    }
+
+    function checkFloorCollision(i, nextPy) {
+        if (nextPy >= canvas.height - (particles[i].position.z * (canvas.height / 15))) {
+            particles[i].velocity.y *= -1;
+            particles[i].velocity.y *= collisionDamper;
+            particles[i].length = 3;
+            if (particles[i].velocity.y >= -0.2 && particles[i].velocity.y <= 0.2) {
+                particles[i].setParticle();
+            }
+        }
+    }
+
+    function loop() {
+        clear();
+        update();
+        draw();
+        queue();
+    }
+
+    function clear() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    function filterNonRemovable(p){
+    	return !p.removeParticle;
+    }
+    function removeParticle(){
+    	var filteredParticles = particles.filter(filterNonRemovable);
+    	if(filteredParticles[filteredParticles.length-1]){
+	    	filteredParticles[filteredParticles.length-1].removeParticle = true;
+    	}
+    };
+
+    function update() {
+    	var filteredParticles = particles.filter(filterNonRemovable);
+        if (filteredParticles.length < numParticles) {
+            newParticle();
+        }else if(filteredParticles.length > numParticles){
+        	removeParticle();
+        }
+        updateParticles();
+    }
+
+    function draw() {
+        drawParticles();
+    }
+
+    function queue() {
+        window.requestAnimationFrame(loop);
+    }
+
+    function startRain(){
+    	var setInt;
+    	setInt = setInterval(function(){
+    		if(numParticles < maxParticles){
+    			numParticles++;
+    		}else{
+    			clearInterval(setInt);
+				setTimeout(function() {
+					stopRain();
+				}, 8000);
+    		}
+    	},20);
+    }
+
+    function stopRain(){
+    	var setInt;
+    	setInt = setInterval(function(){
+    		if(numParticles > 10){
+    			numParticles--;
+    		}else{
+    			clearInterval(setInt);
+				setTimeout(function() {
+					startRain();
+				}, 5000);
+    		}
+    	},50);
+    }
+    window.onload = function() {
+        setTimeout(function() {
+            loop();
+            startRain();
+        }, 100);
+    }
 createRain();
 </script>
 </body></html>
