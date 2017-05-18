@@ -1,0 +1,98 @@
+
+<!DOCTYPE html><html class=''>
+<head><meta charset='UTF-8'>
+<link rel="stylesheet" type="text/css" href="support/examples_2.css" media="all" />
+<style class="cp-pen-styles">
+</style></head><body>
+
+<img id="cloud1" src="clouds.png" style="height: 80px; float: right; padding: 0px;border: none;"/><br/>
+
+    <header class="header"><br/>
+        <center><h1>CNH K67 PhotoBook</h1><br/>
+		From <b>#ChatbotCNH</b> and <b>#MUC17</b> with ♥<br/><br/>
+		</center>
+    </header>
+
+<div class="m-p-g" id="allImages">
+	<div class="m-p-g__thumbs" data-google-image-layout data-max-height="350">
+	</div>
+
+	<div class="m-p-g__fullscreen"></div>
+</div>
+
+<center><p style="width:100%;">___________</p></center>
+
+<center><p id="footnote" style="width:100%; color: black"></p></center>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src='material-photo-gallery.js'></script>
+<script src="jquery.waitforimages.js"></script>
+<script>
+var gallery;
+	var elem = document.querySelector('.m-p-g');
+
+	document.addEventListener('DOMContentLoaded', function() {
+		gallery = new MaterialPhotoGallery(elem);
+	});
+	
+var MAXIMG = 153;
+var imgCount = 0;
+var loadCount = 0;
+$(window).scroll(function() {
+	if($(window).scrollTop() + $(window).height() > $(document).height() - 50) {
+		//loadImgs();
+		$('#mbutton').fadeIn();
+	}
+});
+var isEnded = false;
+var imgsArr = [];
+for (var n=0 ; n<MAXIMG ; n++) {
+	imgsArr[n] = n;
+}
+imgsArr = shuffle(imgsArr);
+	
+function loadImgs() {
+	//$.each($('.Image_Wrapper'),function(i,e){e.removeAttribute('style')});
+	var htmlToInject = "<div class=\"m-p-g__thumbs\" data-google-image-layout data-max-height=\"350\">";//$('#allImages').html();
+	for (var i=0 ; i<35 ; i++) {
+		if (imgCount >= MAXIMG) {
+			isEnded = true;
+			break;
+		}
+		htmlToInject += '<img src=\"img/' + imgsArr[imgCount] + '.jpg\" data-full=\"img/' + imgsArr[imgCount] + '.jpg\" class=\"m-p-g__thumbs-img\" />';
+		imgCount++;
+	}
+	if (isEnded) {
+		$('#footnote').html("<br/><br/><br/><br/>Hãy đóng góp thêm nhiều ảnh bằng cách gửi qua inbox fanpage <b>MUC17</b> cho chúng mình nhé!<br/><br/>Cảm ơn bạn!<br/><br/><br/>");
+		return;
+	} else {
+		$('#footnote').html("<br/><br/><br/><br/><a id=\"mbutton\" class=\"custom button\" onclick=\"loadImgs();\" style=\"display:none\">Xem thêm</a><br/><br/><br/>");
+	}
+	
+	htmlToInject+="</div><div class=\"m-p-g__fullscreen\"></div>";
+	$('#allImages').html(htmlToInject);
+	
+	$('#allImages').waitForImages(function() {
+		gallery = new MaterialPhotoGallery(elem);
+		console.log('loaded '+loadCount);
+		window.scrollTo(0,0);
+		loadCount++;
+	});
+}
+
+loadImgs();
+
+function shuffle(array) {
+    let counter = array.length;
+    while (counter > 0) {
+        let index = Math.floor(Math.random() * counter);
+        counter--;
+        let temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+    }
+    return array;
+}
+
+</script>
+</body></html>
