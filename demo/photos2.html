@@ -22,6 +22,7 @@
     <script src="jquery.collagePlus.js"></script>
     <script src="extras/jquery.removeWhitespace.js"></script>
     <script src="extras/jquery.collageCaption.js"></script>
+    <script src="jquery.waitforimages.js"></script>
   
     <script type="text/javascript">
 
@@ -119,19 +120,20 @@ function loadImgs() {
 	}
 	htmlToInject += "</section>";
 	$('#allImages').html(htmlToInject);
-	setTimeout(function() {
+	//setTimeout(function() {
+	//	collage('.Collage'+loadCount);
+	//	console.log('loaded '+loadCount);
+	//	loadCount++;
+	//}, 1000);
+	
+	$('#allImages').waitForImages(function() {
 		collage('.Collage'+loadCount);
 		console.log('loaded '+loadCount);
 		loadCount++;
-	}, 1000);
+	});
 }
 
-$(window).load(function () {
-    $(document).ready(function(){
-        setTimeout(function() {loadImgs();}, 2000);
-		//console.log('loaded');
-    });
-});
+setTimeout(function() {loadImgs();}, 1000);
 
 function shuffle(array) {
     let counter = array.length;
