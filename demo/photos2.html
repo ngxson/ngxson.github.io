@@ -68,6 +68,15 @@
 		.Image_Wrapper {
 			/*max-height:300px;*/
 		}
+		
+		.loading {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: rgba(0,0,0,0.5);
+			z-index: 100;
+		}
 	</style>
 </head>
 <body>
@@ -79,6 +88,10 @@
 		From <b>#ChatbotCNH</b> and <b>#MUC17</b> with ♥<br/><br/>
 		</center>
     </header>
+	
+<div class="loading" id="loading" style="display:none"><center>
+	<img src="loading.gif" height="100px"/>
+</center></div>
 
 <div id="allImages">
 <!--section class="Collage effect-parent">
@@ -103,10 +116,11 @@ for (var n=0 ; n<MAXIMG ; n++) {
 imgsArr = shuffle(imgsArr);
 
 function loadImgs() {
+	if (!isEnded) {  $('#loading').fadeIn(1000); }
 	//$.each($('.Image_Wrapper'),function(i,e){e.removeAttribute('style')});
 	var htmlToInject = $('#allImages').html();
 	htmlToInject += "<section class=\"Collage"+loadCount+" effect-parent\" style=\"padding:10px;\">";
-	for (var i=0 ; i<25 ; i++) {
+	for (var i=0 ; i<30 ; i++) {
 		if (imgCount >= MAXIMG) {
 			isEnded = true;
 			break;
@@ -115,6 +129,7 @@ function loadImgs() {
 		imgCount++;
 	}
 	if (isEnded) {
+		$('#loading').fadeOut(1000);
 		$('#footnote').html("Hãy đóng góp thêm nhiều ảnh bằng cách gửi qua inbox fanpage <b>MUC17</b> cho chúng mình nhé!<br/><br/>Cảm ơn bạn!<br/><br/><br/>");
 		return;
 	}
@@ -127,6 +142,7 @@ function loadImgs() {
 	//}, 1000);
 	
 	$('#allImages').waitForImages(function() {
+		$('#loading').fadeOut(1000);
 		collage('.Collage'+loadCount);
 		console.log('loaded '+loadCount);
 		loadCount++;
