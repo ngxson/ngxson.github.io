@@ -121,13 +121,15 @@ function loadImgs() {
 	$('#allImages').html(htmlToInject);
 	setTimeout(function() {
 		collage('.Collage'+loadCount);
+		console.log('loaded '+loadCount);
 		loadCount++;
 	}, 1000);
 }
 
 $(window).load(function () {
     $(document).ready(function(){
-        setInterval(function() {loadImgs();}, 2000);
+        setTimeout(function() {loadImgs();}, 2000);
+		//console.log('loaded');
     });
 });
 
