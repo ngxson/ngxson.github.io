@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8">
     <title>K67 CNH PhotoBook</title>
-
+	<meta property="og:image" content="logo_fb.png" />
+	<meta property="og:title" content="K67 CNH PhotoBook" />
+	<meta property="og:description" content="From #ChatbotCNH and #MUC17 with love" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="support/examples.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/transitions.css" media="all" />
@@ -77,11 +79,36 @@
 			background-color: rgba(0,0,0,0.5);
 			z-index: 100;
 		}
+		
+		.fit { /* set relative picture size */
+			max-width: 100%;
+			max-height: 100%;
+			transform: translate(-50%, -50%);
+			top: 50%;
+			left: 50%;
+			position: fixed;
+			margin: auto;
+		}
+		
+		.photoPreview {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0,0,0,0.5);
+			z-index: 99;
+			display: none;
+		}
 	</style>
 </head>
 <body>
 
 <img id="cloud1" src="clouds.png" style="height: 80px; float: right; padding: 0px;border: none;"/><br/>
+
+<div id="photoPreview" class="photoPreview" onclick="dismissPreview();">
+	<button onclick="dismissPreview();" style="position: fixed; right:0; z-index: 100"> X </button>
+	<img id="imgPreview" class="fit"></img>
+</div>
+
 
     <header class="header"><br/>
         <center><h1>CNH K67 PhotoBook</h1><br/>
@@ -98,9 +125,10 @@
 	<div class="Image_Wrapper"><img src="img/1.jpg"/></div>
 </section-->
 </div>
+<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
 
 <script>
-var MAXIMG = 153;
+var MAXIMG = 0;
 var imgCount = 0;
 var loadCount = 0;
 $(window).scroll(function() {
@@ -113,28 +141,53 @@ var imgsArr = [];
 for (var n=0 ; n<MAXIMG ; n++) {
 	imgsArr[n] = n;
 }
-imgsArr = shuffle(imgsArr);
+//imgsArr = shuffle(imgsArr);
+
+var config = {
+  apiKey: "AIzaSyCe1R8gWClOJqiHbjntI_Imjkcw_XRyoRI",
+  databaseURL: "https://k67thptcnh.firebaseio.com"
+};
+firebase.initializeApp(config);
+var dataStack = [];
+
+firebase.database().ref('/pics/').once('value').then(function(snapshot) {
+	var dataSnap = snapshot.toJSON();
+	Object.keys(dataSnap).map(function(objectKey, index) {
+		var e = dataSnap[objectKey];
+		if (e.deleted == true) return;
+		dataStack.push(e.url);
+		imgCount++;
+	});
+	imgCount--;
+	loadImgs();
+});
 
 function loadImgs() {
 	if (!isEnded) {  $('#loading').fadeIn(1000); }
 	//$.each($('.Image_Wrapper'),function(i,e){e.removeAttribute('style')});
 	var htmlToInject = $('#allImages').html();
 	htmlToInject += "<section class=\"Collage"+loadCount+" effect-parent\" style=\"padding:10px;\">";
-	for (var i=0 ; i<30 ; i++) {
-		if (imgCount >= MAXIMG) {
+	var i=0;
+	for (i=0 ; i<15 ; i++) {
+		//if (imgCount >= MAXIMG) {
+		if (imgCount < 0) {
 			isEnded = true;
 			break;
 		}
-		htmlToInject += '<div class=\"Image_Wrapper\"><img src=\"img/' + imgsArr[imgCount] + '.jpg"></div>';
-		imgCount++;
+		//htmlToInject += '<div class=\"Image_Wrapper\"><img src=\"img/' + imgsArr[imgCount] + '.jpg" onclick=\"openPreview(' + imgsArr[imgCount] + ')\"></div>';
+		var imgUrl = encodeURIComponent(dataStack[imgCount]);
+		htmlToInject += '<div class=\"Image_Wrapper\"><img src=\"https://chuyennguyenhue.com/ngxson/resize.php?img=' + imgUrl + '\" onclick=\"openPreview(' + imgCount + ')\"></div>';
+		//imgCount++;
+		imgCount--;
 	}
 	if (isEnded) {
 		$('#loading').fadeOut(1000);
 		$('#footnote').html("Hãy đóng góp thêm nhiều ảnh bằng cách gửi qua inbox fanpage <b>MUC17</b> cho chúng mình nhé!<br/><br/>Cảm ơn bạn!<br/><br/><br/>");
-		return;
 	}
-	htmlToInject += "</section>";
-	$('#allImages').html(htmlToInject);
+	if (i>0) {
+		htmlToInject += "</section>";
+		$('#allImages').html(htmlToInject);
+	}
 	//setTimeout(function() {
 	//	collage('.Collage'+loadCount);
 	//	console.log('loaded '+loadCount);
@@ -149,7 +202,15 @@ function loadImgs() {
 	});
 }
 
-loadImgs();
+function openPreview(id) {
+	//$("#imgPreview").attr("src","img/"+id+".jpg");
+	$("#imgPreview").attr("src",dataStack[id]);
+	$("#photoPreview").fadeIn(500);
+}
+
+function dismissPreview() {
+	$("#photoPreview").fadeOut(500);
+}
 
 function shuffle(array) {
     var counter = array.length;

@@ -1,0 +1,369 @@
+
+<!DOCTYPE html><html class=''>
+<head><meta charset='UTF-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style class="cp-pen-styles">
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900&subset=latin-ext,vietnamese");
+body {
+	margin: 0;
+	background: #dce1df;
+	color: #4f585e;
+	font-family: 'Source Sans Pro', sans-serif;
+	text-rendering: optimizeLegibility;
+	background: url(bg_white.jpg) no-repeat center center fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+a.btn {
+	background: #0096a0;
+	border-radius: 4px;
+	box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.25);
+	color: #ffffff;
+	display: inline-block;
+	padding: 6px 30px 8px;
+	position: relative;
+	text-decoration: none;
+	-webkit-transition: all 0.1s 0s ease-out;
+	transition: all 0.1s 0s ease-out;
+	cursor: pointer;
+}
+.no-touch a.btn:hover {
+	background: #00a2ad;
+	box-shadow: 0px 8px 2px 0 rgba(0, 0, 0, 0.075);
+	-webkit-transform: translateY(-2px);
+					transform: translateY(-2px);
+	-webkit-transition: all 0.25s 0s ease-out;
+	transition: all 0.25s 0s ease-out;
+}
+.no-touch a.btn:active,
+a.btn:active {
+	background: #008a93;
+	box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.25);
+	-webkit-transform: translate3d(0, 1px, 0);
+					transform: translate3d(0, 1px, 0);
+	-webkit-transition: all 0.025s 0s ease-out;
+	transition: all 0.025s 0s ease-out;
+}
+a.btngray {
+	background: #00aeba;
+}
+div.cards {
+	margin: 10px auto;
+	max-width: 960px;
+	text-align: center;
+}
+div.card {
+	background: #ffffff;
+	display: inline-block;
+	margin: 8px;
+	max-width: 300px;
+	-webkit-perspective: 1000;
+					perspective: 1000;
+	position: relative;
+	text-align: left;
+	-webkit-transition: all 0.3s 0s ease-in;
+	transition: all 0.3s 0s ease-in;
+	z-index: 1;
+}
+div.card img {
+	max-width: 300px;
+}
+div.card div.card-title {
+	background: #ffffff;
+	padding: 6px 15px 10px;
+	position: relative;
+	z-index: 0;
+}
+div.card div.card-title a.toggle-info {
+	border-radius: 32px;
+	height: 32px;
+	padding: 0;
+	position: absolute;
+	right: 15px;
+	top: 10px;
+	width: 32px;
+}
+div.card div.card-title a.toggle-info span {
+	background: #ffffff;
+	display: block;
+	height: 2px;
+	position: absolute;
+	top: 16px;
+	-webkit-transition: all 0.15s 0s ease-out;
+	transition: all 0.15s 0s ease-out;
+	width: 12px;
+}
+div.card div.card-title a.toggle-info span.left {
+	right: 14px;
+	-webkit-transform: rotate(45deg);
+					transform: rotate(45deg);
+}
+div.card div.card-title a.toggle-info span.right {
+	left: 14px;
+	-webkit-transform: rotate(-45deg);
+					transform: rotate(-45deg);
+}
+div.card div.card-title h2 {
+	font-size: 24px;
+	font-weight: 700;
+	letter-spacing: -0.05em;
+	margin: 0;
+	padding: 0;
+}
+div.card div.card-title h2 small {
+	display: block;
+	font-size: 18px;
+	font-weight: 600;
+	letter-spacing: -0.025em;
+}
+div.card div.card-description {
+	padding: 0 15px 10px;
+	position: relative;
+	font-size: 14px;
+}
+div.card div.card-actions {
+	box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.075);
+	padding: 10px 15px 20px;
+	text-align: center;
+}
+div.card div.card-flap {
+	background: #d9d9d9;
+	position: absolute;
+	width: 100%;
+	-webkit-transform-origin: top;
+					transform-origin: top;
+	-webkit-transform: rotateX(-90deg);
+					transform: rotateX(-90deg);
+}
+div.card div.flap1 {
+	-webkit-transition: all 0.3s 0.3s ease-out;
+	transition: all 0.3s 0.3s ease-out;
+	z-index: -1;
+}
+div.card div.flap2 {
+	-webkit-transition: all 0.3s 0s ease-out;
+	transition: all 0.3s 0s ease-out;
+	z-index: -2;
+}
+div.cards.showing div.card {
+	cursor: pointer;
+	opacity: 0.6;
+	-webkit-transform: scale(0.88);
+					transform: scale(0.88);
+}
+.no-touch div.cards.showing div.card:hover {
+	opacity: 0.94;
+	-webkit-transform: scale(0.92);
+					transform: scale(0.92);
+}
+div.card.show {
+	opacity: 1 !important;
+	-webkit-transform: scale(1) !important;
+					transform: scale(1) !important;
+}
+div.card.show div.card-title a.toggle-info {
+	background: #ff6666 !important;
+}
+div.card.show div.card-title a.toggle-info span {
+	top: 15px;
+}
+div.card.show div.card-title a.toggle-info span.left {
+	right: 10px;
+}
+div.card.show div.card-title a.toggle-info span.right {
+	left: 10px;
+}
+div.card.show div.card-flap {
+	background: #ffffff;
+	-webkit-transform: rotateX(0deg);
+					transform: rotateX(0deg);
+}
+div.card.show div.flap1 {
+	-webkit-transition: all 0.3s 0s ease-out;
+	transition: all 0.3s 0s ease-out;
+}
+div.card.show div.flap2 {
+	-webkit-transition: all 0.3s 0.2s ease-out;
+	transition: all 0.3s 0.2s ease-out;
+}
+</style></head><body>
+<center>
+	<br/>
+	<h1 style="margin: 0">HOẠT ĐỘNG NGOẠI KHÓA</h1>
+	<small style="margin: 0">Tổng hợp bởi <b>Nui</b> và <b>Trần Đức Hoàng</b></small>
+	<p style="line-height: 20px">
+	<a onclick="showCategory(0)" id="catBtn0" class="btn">Tất cả</a>
+	<a onclick="showCategory(1)" id="catBtn1" class="btn btngray">Câu lạc bộ</a>
+	<a onclick="showCategory(2)" id="catBtn2" class="btn btngray">Trang giải trí, thông tin</a>
+	<a onclick="showCategory(3)" id="catBtn3" class="btn btngray">Sự kiện thường niên</a>
+	</p>
+</center>
+<div class="cards" id="contentData" style="display: none">
+
+	<!--div class="card">
+		<img src="http://s4c.cymru/temp/wave1.jpg">
+		<div class="card-title">
+			<a href="#" class="toggle-info btn">
+				<span class="left"></span>
+				<span class="right"></span>
+			</a>
+			<h2>
+					Inspiration Day
+					<small>Hoạt động ngoại khóa</small>
+			</h2>
+		</div>
+		<div class="card-flap flap1">
+			<div class="card-description">
+				Sự kiện chào đón tân học sinh lớn nhất tại CNH.
+			</div>
+			<div class="card-flap flap2">
+				<div class="card-actions">
+					<a href="#" class="btn">Tới Facebook</a>
+				</div>
+			</div>
+		</div>
+	</div-->
+
+</div>
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script>
+
+var content = [
+["Inspiration Day",3,"Sự kiện chào đón tân học sinh lớn nhất tại CNH. Tổ chức bởi đoàn trường.","13902815_185467331868239_5868205736155317007_n.jpg","https://www.facebook.com/Inspirationday2016/"],
+["Chatbot CNH",2,"Được biết đến như 1 sản phẩm công nghệ với nhiều tính năng độc quyền, Chatbot CNH là nơi các bạn học sinh, không kể từ lớp nào, có thể làm quen và nói chuyện với nhau 1 cách dễ dàng.<br/><br/>Tác giả: Nui - lý 2 K66","17342861_200153943812561_5174036201369097198_n.png","https://www.facebook.com/cnh.chatbot/"],
+["CNH Confessions",2,"Nơi thổ lộ những tâm sự, tâm tư của CNHers.","10447116_784798254873916_3153255163334649555_n.png","https://www.facebook.com/CNHConfessions/"],
+["The Seventh Art Club (SAC)",1,"CLB dành cho những học sinh có chung sở thích với bộ môn nghệ thuật thứ bảy - Điện Ảnh<br/><br/>Nổi bật với các sự kiện chính như Prom thường niên dành cho học sinh của trường, cuộc thi làm phim ngắn TOP - The Original Project, các hoạt động từ thiện...","10987710_861493283913637_7971365934018798752_n.jpg","https://www.facebook.com/CNH.SAC/"],
+["CNH Spotlight",1,"Trang báo chính thức của trường CNH.","14045966_1771161213173677_3434572477830701253_n.jpg","https://www.facebook.com/cnhspotlight/"],
+["Music Ig Club (MIC)",1,"CLB âm nhạc duy nhất và chính thức của CNH, nơi để những cá nhân yêu âm nhạc cùng tỏa sáng.","10636311_796409053780888_3378621661174310654_n.jpg","https://www.facebook.com/mic.cnh/"],
+["Humans of CNH (HOC)",2,"Kênh đặc biệt được thành lập với mục đích kết nối các học sinh của CNH.","1958443_1504985079761309_4381663400807236379_n.jpg","https://www.facebook.com/Humansofcnh/"],
+["The Original Project",3,"Cuộc thi làm phim ngắn thường niên cho các bạn học sinh THCS và THPT toàn thành phố Hà Nội.<br/>Tổ chức và bảo trợ bởi SAC - the Seventh Art Club CNH.","13567305_1811764385774785_9110998670539817919_n.jpg","https://www.facebook.com/CNH.TOP"],
+["Move Up CNH",3,"Lễ trưởng thành cho khối 12, tổ chức vào cuối năm học với mục đích lưu giữ những kỷ niệm đẹp của thời học sinh tại CNH. Tổ chức bởi đoàn trường.","17992343_193410434507112_3846967312618218472_n.jpg","https://www.facebook.com/muc17/"],
+["Masquerade Prom 2017",3,"Dạ hội thường niên mỗi cuối năm học, tổ chức bởi SAC. ","14962733_200100323772209_4172024722803322807_n.jpg","https://www.facebook.com/msqrd.prom17"],
+["Pioneers of the Future (POF)",1,"CLB được thành lập với mục đích tạo ra các sân chơi ngôn ngữ bổ ích, lý thú dành cho các bạn học sinh trong trường<br/><br/>Đã tổ chức thành công English Festival đầu tiên cho học sinh trong trường.","15825988_695069904005065_654146607095719552_n.jpg","https://www.facebook.com/cnh.pof/"],
+["Nguyen Hue Dance Club (NDC)",1,"CLB của các dancers CNH.","17626148_1839642772963656_1979691742589385353_n.jpg","https://www.facebook.com/CNHDance/"],
+["CNH Esport Community",1,"CLB dành cho CNHers thỏa mãn niềm đam mêm thể thao điện tử.","15740926_1170718363006278_7351010244445209865_n.jpg","https://www.facebook.com/cnhec/"],
+["CNH Broadcasting Chanel (BC)",1,"Kênh phát thanh của CNH.","14063944_960257014096100_8393844284038465899_n.png","https://www.facebook.com/chuyennguyenhue.bc/"],
+["Ravers of CNH",1,"CLB hội tụ các ravers và EDM lovers của CNH.","14695484_695115520637568_4847696667702083284_n.jpg","https://www.facebook.com/raversofcnh/"],
+["CNH Shutter Club (CSC)",1,"CLB dành cho những học sinh của CNH có niềm đam mê với nhiếp ảnh.","11949462_1755468858014071_8541555079966455846_n.jpg","https://www.facebook.com/cnhshutterclub/"],
+["CNH GSSO Support Group",1,"CLB tư vấn và hỗ trợ về giới tính và khuynh hướng tình dục của CNH.","12191690_1151238888224477_1583844762522387_n.png","https://www.facebook.com/gssocnh/"],
+["Cosmos (CLB Khoa học)",1,"CLB dành cho những ai yêu khoa học, toán học hay những thí nghiệm hóa học","18425256_1320120878082616_1281541350547637421_n.jpg","https://www.facebook.com/cnhcosmos/"],
+["Vanilla",2,"Sản phẩm nghệ thuật tinh tế của 3 cô gái đầy tài năng đến từ trường THPT CNH.","16602826_1414129195310991_2820386779599680997_n.jpg","https://www.facebook.com/Vanilla-1414127045311206/"],
+["CNH Art Club (FIUS)",1,"CLB dành cho học sinh CNH yêu thích và đam mê hội hoạ.","12346537_202267626774611_3712334360657080669_n.jpg","https://www.facebook.com/FIUS-CNH-Art-Club-202266360108071/"],
+["CNH Cubing Club",1,"Câu lạc bộ rubiks của CNH.","11903868_754067588071975_42092172659047826_n.jpg","https://www.facebook.com/CNHCubingClub/"],
+["CNH Japanese Culture Club (JCC)",1,"CLB văn hóa Nhật Bản của CNH.","10983420_938776916146450_6328980544006719041_n.jpg","https://www.facebook.com/CNHJapaneseClub/"],
+["Sports Art CNH",1,"CLB rèn thể lực của CNH, chuyên về Street Workout, Parkour & Free Running.","10984063_1569705789942780_1755546301694377398_n.jpg","https://www.facebook.com/StreetWorkoutandCalisthenicsCNH/"],
+["CNH Panthers",1,"Đội bóng rổ của CNH.","14068039_1760687387540530_2345627229501542157_n.jpg","https://facebook.com/CNHbasketballclub/"],
+["Meme tui đi CNH",2,"Fanpage giải trí, chế ảnh hài hước, châm biếm.","17553721_187461101763817_845269351006468963_n.jpg","https://www.facebook.com/memetujkCNH/"]
+];
+
+var category = [ null,
+	"Câu lạc bộ",
+	"Trang giải trí, thông tin",
+	"Sự kiện thường niên"
+];
+
+function renderData(cat) {
+	var htmlData = "";
+	for (var i=0 ; i<content.length ; i++) {
+		if (cat == 0 || cat == content[i][1])
+			htmlData += generateCard(i);
+	}
+	$('#contentData').html(htmlData);
+}
+
+renderData(0);
+$("div.card").click(handleCardClick);
+$('#contentData').fadeIn(1000);
+
+function showCategory(cat) {
+	$('#contentData').fadeOut(500);
+	$("#catBtn0").addClass("btngray");
+	$("#catBtn1").addClass("btngray");
+	$("#catBtn2").addClass("btngray");
+	$("#catBtn3").addClass("btngray");
+	$("#catBtn"+cat).removeClass("btngray");
+	setTimeout(function() {
+		renderData(cat);
+		$("div.card").click(handleCardClick);
+		$('#contentData').fadeIn(500);
+	},500);
+}
+
+var zindex = 10;
+var handleCardClick = function(e){
+	//e.preventDefault();
+
+	var isShowing = false;
+
+	if ($(this).hasClass("show")) {
+		isShowing = true
+	}
+
+	if ($("div.cards").hasClass("showing")) {
+		// a card is already in view
+		$("div.card.show")
+			.removeClass("show");
+
+		if (isShowing) {
+			// this card was showing - reset the grid
+			$("div.cards")
+				.removeClass("showing");
+		} else {
+			// this card isn't showing - get in with it
+			$(this)
+				.css({zIndex: zindex})
+				.addClass("show");
+
+		}
+
+		zindex++;
+
+	} else {
+		// no cards in view
+		$("div.cards")
+			.addClass("showing");
+		$(this)
+			.css({zIndex:zindex})
+			.addClass("show");
+
+		zindex++;
+	}
+	
+}
+
+$(document).ready(function(){
+	var zindex = 10;
+	
+	$("div.card").click(handleCardClick);
+});
+
+function generateCard(id) {
+	return "<div class=\"card\">"
+	+"	<img src=\"logos/"+content[id][3]+"\">"
+	+"	<div class=\"card-title\">"
+	+"		<a class=\"toggle-info btn\">"
+	+"			<span class=\"left\"></span>"
+	+"			<span class=\"right\"></span>"
+	+"		</a>"
+	+"		<h2>"
+	+content[id][0]
+	+"				<small>"+category[content[id][1]]+"</small>"
+	+"		</h2>"
+	+"	</div>"
+	+"	<div class=\"card-flap flap1\">"
+	+"		<div class=\"card-description\">"
+	+content[id][2]
+	+"		</div>"
+	+"		<div class=\"card-flap flap2\">"
+	+"			<div class=\"card-actions\">"
+	+"				<a href=\""+content[id][4]+"\" class=\"btn\" target=\"_blank\">Tới Facebook</a>"
+	+"			</div>"
+	+"		</div>"
+	+"	</div>"
+	+"</div>";
+}
+</script>
+</body></html>

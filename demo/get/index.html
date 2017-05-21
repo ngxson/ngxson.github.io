@@ -1,0 +1,84 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+	img {
+		height: 150px;
+		
+	}
+	table {
+		padding: 10px;
+		float:left;
+	}
+	</style>
+</head>
+<body>
+<button onclick="showData(true)">Show Hidden Photos</button>
+<div id="dataView"></div>
+<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+<script>
+// Initialize Firebase
+// TODO: Replace with your project's customized code snippet
+var config = {
+  apiKey: "AIzaSyCe1R8gWClOJqiHbjntI_Imjkcw_XRyoRI",
+  databaseURL: "https://k67thptcnh.firebaseio.com"
+};
+firebase.initializeApp(config);
+
+var dataView = document.getElementById('dataView');
+var dataSnap = {};
+
+firebase.database().ref('/pics/').once('value').then(function(snapshot) {
+	dataSnap = snapshot.toJSON();
+	showData(false);
+});
+
+function showData(showDeleted) {
+	dataView.innerHTML = "";
+	Object.keys(dataSnap).map(function(objectKey, index) {
+		var e = dataSnap[objectKey];
+		//console.log(value.url);
+		if (showDeleted) {
+			if (e.deleted) {
+				dataView.innerHTML = '<table id=\"i'+objectKey+'\"><tr><td><img src=\"'+e.url+'\" /></td></tr><tr><td>'+
+				'<button onclick=\"res('+objectKey+');\">Restore</button>'+
+				'</td></tr></table>' + dataView.innerHTML;
+			}
+		} else {
+			if (e.deleted) {
+				return;
+			} else {
+				dataView.innerHTML = '<table id=\"i'+objectKey+'\"><tr><td><img src=\"'+e.url+'\" /></td></tr><tr><td>'+
+				'<button onclick=\"del('+objectKey+');\">Hide</button>'+
+				'</td></tr></table>' + dataView.innerHTML;
+			}
+		}
+	});
+}
+
+function del(key) {
+	var e = confirm("sure?");
+	if (e == true) {
+		var imge = document.getElementById('i'+key);
+		imge.parentNode.removeChild(imge);
+		dataSnap[key].deleted = true;
+		firebase.database().ref('/pics/' + key + '/deleted').set(true);
+	}
+}
+
+function res(key) {
+		var imge = document.getElementById('i'+key);
+		imge.parentNode.removeChild(imge);
+		dataSnap[key].deleted = false;
+		firebase.database().ref('/pics/' + key + '/deleted').set(false);
+}
+</script>
+</body>
+</html>
