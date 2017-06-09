@@ -29,7 +29,7 @@ div {
 
 </script>
 	  <span style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; width:100%;">
-		   Tự động update sau mỗi 5 phút. Nếu bạn chưa thấy dự án mình vừa nhập, hãy quay lại sau 5 phút nữa.<br/>
+		   <b>Database </b> - Tổng hợp các dự án và cuộc thi dành cho học sinh, sinh viên<br/>
 			▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 		</span><br/>
 		<span id="include" style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; width:100%;">
@@ -39,17 +39,17 @@ div {
 		</span>
 <br/>
 <script>
-	$.ajaxPrefilter( function (options) {
+	/*$.ajaxPrefilter( function (options) {
 	if (options.crossDomain && jQuery.support.cors) {
 		var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
 		options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
 	}
-	});
+	});*/
 	
-	$.get('https://docs.google.com/spreadsheets/d/1QKNV7TvD4UWeuSB4oWXIBUGnuW3LzaY41kIrBk69fBE/pub?gid=1384646195&single=true&output=csv',
+	$.get('https://script.google.com/macros/s/AKfycbypCH1hvDq2rF2uCNM8trzT_4MrZHUpqYrZiUbBR8ULW-OP-c4/exec',
 		function (response) {
 			response = autoURL(response);
-			$("#include").html((response.replace(/\n/g, "<br/>")+" -->").slice(4));
+			$("#include").html((response.replace(/\n/g, "<br/>")+" --><br/>Créé par <a href=\"http:\/\/fb.com\/ngxson\">Nui</a> - Version 2.2").slice(4));
 	});
 	
 	function autoURL(text) {
