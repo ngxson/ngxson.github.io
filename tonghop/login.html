@@ -1,0 +1,57 @@
+
+<html>
+<head>
+<meta charset='UTF-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Dữ liệu tổng hợp các sự kiện cho học sinh, sinh viên</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+<script src="secret.js"></script>
+<style>
+h2 {
+	color: black; text-decoration: none; 
+	font-size:1.4em;
+}
+
+div {
+    padding-left: 1.5em;
+    text-indent:-1.5em;
+}
+</style>
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-78579525-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+	  <span style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; width:100%;">
+		Password: <input type="password" id="pwd" /><br/>
+		<button onclick="doLogin();" id='loginbtn'>Login</button>
+		</span>
+<br/>
+<script>
+function doLogin() {
+	var pwd = $('#pwd').val();
+	$('#loginbtn').html('Loading...');
+	$.get('https://script.google.com/macros/s/AKfycbypCH1hvDq2rF2uCNM8trzT_4MrZHUpqYrZiUbBR8ULW-OP-c4/exec?pwd='+pwd+'&action=login',
+		function (res) {
+			if (res === 'OK') {
+				createCookie('tonghop',pwd,365);
+				setTimeout(function() {
+					window.location.href = 'index.html';
+				}, 100);
+			} else {
+				alert('wrong password!');
+				$('#loginbtn').html('Login');
+			}
+		}
+	);
+}
+</script>
+
+</body></html>
