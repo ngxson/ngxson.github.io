@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>template1 - j'espère</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <meta name="title" content="template1 - j\'espère" />
+    <meta name="robots" content="all">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&amp;subset=latin-ext,vietnamese" rel="stylesheet" type="text/css">
+    <!--[if !IE 7]>
+        <style type="text/css">
+            #main {display:table;height:100%}
+        </style>
+    <![endif]-->
+	<style>
+		.maincanvas {
+			/*font-family: 'Amatic SC';*/
+		}
+	</style>
+</head>
+
+<body>
+   
+	Tên SP:<br/>
+	<input id="inp_label" style='width:100%; font-size:1.2em'></input><br/>
+	Giá:
+	<input id="inp_price" style='width:100px; font-size:1.2em'></input><br/>
+    <label>Chọn file:</label><br/>
+	<input type="file" id="imageLoader" name="imageLoader"/><br/><br/>
+	<a id="download" style='font-size:1.2em'>_____LƯU ẢNH VỀ MÁY_____</a>
+	<div class="maincanvas">
+		<canvas id="imageCanvas"></canvas>
+	</div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="/jquery.min.js"><\\/script>')
+
+    </script>
+
+    <script>
+var imageLoader = document.getElementById('imageLoader');
+    imageLoader.addEventListener('change', handleImage, false);
+var canvas = document.getElementById('imageCanvas');
+var ctx = canvas.getContext('2d');
+canvas.width = 1998;
+canvas.height = 1332;
+
+function handleImage(e){
+    var reader = new FileReader();
+	var img = new Image();
+    reader.onload = function(event){
+        var img = new Image();
+		var img2 = new Image();
+		var ok=false, ok2=false;
+        img.onload = function(){
+			ok=true;
+			doLoad();
+        }
+		img2.onload = function(){
+			ok2=true;
+			doLoad();
+        }
+		function doLoad() {
+			if (!ok || !ok2) return;
+			var MAX_WIDTH = 932;
+			var MAX_HEIGHT = 1180;
+			var cw=canvas.width;
+			var ch=canvas.height;
+			var iw=img.width;
+			var ih=img.height;
+			
+			// calc scale that fits into 200x200 and also maintains aspect ratio
+			var scale=Math.max((MAX_WIDTH/iw),(MAX_HEIGHT/ih));
+			var sw=iw*scale;
+			var sh=ih*scale;
+			ctx.drawImage(img,
+                0,0,iw,ih,
+                //(canvas.width-sw)/2+91,(canvas.height-sh)/2
+				1461-(iw*scale)/2,678-(ih*scale)/2
+				,iw*scale,ih*scale
+               );
+            //ctx.drawImage(img,1998/2,-100,932,1000);
+			ctx.font = "88px \'Times New Roman\'";
+			ctx.textAlign = "right";
+			ctx.fillStyle = '#3e0b0e';
+            ctx.drawImage(img2,0,0);
+			ctx.fillText($('#inp_label').val(),922,506);
+			ctx.fillText("Giá: "+$('#inp_price').val(),922,610);
+		}
+        img.src = event.target.result;
+		img2.src = "jespere_template1.png";
+    }
+    reader.readAsDataURL(e.target.files[0]);     
+}//932x1180
+
+document.getElementById('download').addEventListener('click', function() {
+	downloadCanvas(this, 'imageCanvas', 'anhsanpham.jpeg');
+});
+
+function downloadCanvas(link, canvasId, filename) {
+    link.href = document.getElementById(canvasId).toDataURL("image/jpeg");
+    link.download = filename;
+}
+    </script>
+    
+</body>
+
+</html>
