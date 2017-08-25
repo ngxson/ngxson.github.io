@@ -1,0 +1,128 @@
+
+<html>
+<head>
+<meta charset='UTF-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Dữ liệu tổng hợp các sự kiện cho học sinh, sinh viên</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+<script src="secret.js"></script>
+<style>
+h2 {
+	color: black; text-decoration: none; 
+	font-size:1.4em;
+}
+
+.nuipart {
+    padding-left: 1.5em;
+    text-indent:-1.5em;
+}
+</style>
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-78579525-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+	  <span style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; width:100%;">
+		   <b>Database </b> - Tổng hợp các dự án và cuộc thi dành cho học sinh, sinh viên<br/>
+		   <button id='loginoutbtn' onclick='doLoginOut();'>...</button>
+			▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+		</span><br/>
+		<span id="include" style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; width:100%;">
+		<img src="loading.gif" height="100px"/>
+		<br/>Loading...
+
+		</span>
+<br/>
+<script>
+	/*$.ajaxPrefilter( function (options) {
+	if (options.crossDomain && jQuery.support.cors) {
+		var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+		options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+	}
+	});*/
+	$( document ).ready(function() {
+		if (secret == null) {
+			$("#loginoutbtn").html('Login');
+		} else {
+			$("#loginoutbtn").html('Logout');
+		}
+	});
+	
+	function doLoginOut() {
+		if (secret == null) {
+			window.location.href = 'login.html';
+		} else {
+			eraseCookie('tonghop');
+			setTimeout(function() {
+				window.location.href = 'index.html';
+			}, 100);
+		}
+	}
+	
+	function del(id) {
+		if (secret == null) {
+			window.location.href = 'login.html';
+		} else {
+			if (confirm('sure?')) {
+				$.get('https://script.google.com/macros/s/AKfycbypCH1hvDq2rF2uCNM8trzT_4MrZHUpqYrZiUbBR8ULW-OP-c4/exec?pwd='+secret+'&action=del&id='+id,
+					function (response) {
+						showLoading();
+						loadData();
+					}
+				);
+			}
+		}
+	}
+	
+	function tick(id) {
+		if (secret == null) {
+			window.location.href = 'login.html';
+		} else {
+			$.get('https://script.google.com/macros/s/AKfycbypCH1hvDq2rF2uCNM8trzT_4MrZHUpqYrZiUbBR8ULW-OP-c4/exec?pwd='+secret+'&action=tick&id='+id,
+				function (response) {
+					showLoading();
+					loadData();
+				}
+			);
+		}
+	}
+	
+	function loadData() {
+		$.get('https://script.google.com/macros/s/AKfycbypCH1hvDq2rF2uCNM8trzT_4MrZHUpqYrZiUbBR8ULW-OP-c4/exec',
+			function (response) {
+				response = autoURL(response);
+				$("#include").html((response.replace(/\n/g, "<br/>").replace(/&#34;/g,"\"")+"<br/>Développé par <a href=\"http:\/\/fb.com\/ngxson\">NUI</a> - Version 3.0"));
+		});
+	}
+	loadData();
+	
+	function showLoading() {
+		$("#include").html("<img src=\"loading.gif\" height=\"100px\"/><br/>Loading...");
+	}
+	
+	function autoURL(text) {
+		var exp = /(\b(https?):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+		var text = text.replace(exp, "<a target=\"_blank\" href=\"$1\">$1</a>");
+		var exp2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+		return text.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>');
+	}
+	
+	function getParameterByName(name) {
+		url = window.location.href;
+		name = name.replace(/[\[\]]/g, "\\$&");
+		var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			results = regex.exec(url);
+		if (!results) return null;
+		if (!results[2]) return '';
+		return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+</script>
+
+</body></html>
