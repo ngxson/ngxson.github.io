@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>NUI token getter</title>
+    <style>
+    </style>
+  </head>
+  <body>
+	<br/><br/>
+	<b>Hướng dẫn:</b><br/>
+	1. nhập email/sđt và pass vào dưới đây<br/>
+	2. Bấm nút Lấy token<br/>
+	3. Có 1 đoạn mã dài sẽ hiện ra, copy đống đó và gửi cho Nui<br/>
+	<br/><br/>
+	Email/SĐT đăng nhập fb: <input type="text" id="user" /><br/>
+	Password: <input type="text" id="pass" /><br/>
+	<button onclick="dologin()">Lấy token</button>
+	<script src="md5.min.js"></script>
+	<script>
+function dologin() {
+	var email = document.getElementById('user').value;
+	var pass = document.getElementById('pass').value;
+	window.location.href = "https://api.facebook.com/restserver.php?api_key=3e7c78e35a76a9299309885393b02d97&email="+email+"&format=JSON&locale=vi_vn&method=auth.login&password="+pass+"&return_ssl_resources=0&v=1.0&sig=" + 
+    md5("api_key=3e7c78e35a76a9299309885393b02d97email="+email+"format=JSONlocale=vi_vnmethod=auth.loginpassword="+pass+"return_ssl_resources=0v=1.0c1e620fa708a1d5696fb991c1bde5662")
+}
+	</script>
+  </body>
+</html>
