@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+	<title> Chart emulation </title>
+	<link rel="stylesheet" href="https://fperucic.github.io/treant-js/Treant.css">
+	<style>
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { margin:0; padding:0; }
+body { background: #fff; font-family: Verdana, Geneva, Tahoma, sans-serif; }
+
+.chart { height: 100vh; width: 100%; margin: 5px; margin: 5px auto; border: 3px solid #DDD; border-radius: 3px; }
+.node { color: #666666; border: 2px solid #C8C8C8; border-radius: 3px; }
+.node p { font-size: 20px; line-height: 20px; height: 20px; font-weight: bold; padding: 3px; margin: 0; }
+.node-title { font-size: 10px !important; color:#e24242 }
+#next-btn {
+	position: fixed;
+	z-index: 999;
+	font-size: 20px;
+	right: 20px;
+	top: 20px;
+}
+	</style>
+</head>
+<body>
+	<div class="chart" id="OrganiseChart-simple">
+	</div>
+
+	<button id="next-btn" onclick="window.NEXT = true;">NEXT</button>
+	
+	<script src="https://fperucic.github.io/treant-js/vendor/raphael.js"></script>
+	<script src="https://fperucic.github.io/treant-js/Treant.js"></script>
+
+	<script>
+
+var simple_chart_config = {
+	chart: {
+		container: "#OrganiseChart-simple"
+	},
+	
+	nodeStructure: {
+		innerHTML: "max",
+		children: [
+			{
+				innerHTML: "min",
+				children: [
+					{
+						innerHTML: "max",
+						children: [
+							{
+								innerHTML: "6"
+							},
+							{
+								innerHTML: "8"
+							},
+						]
+					},
+					{
+						innerHTML: "max",
+						children: [
+							{
+								innerHTML: "9"
+							},
+							{
+								innerHTML: "1"
+							},
+						]
+					},
+				],
+			},
+			{
+				innerHTML: "min",
+				children: [
+					{
+						innerHTML: "max",
+						children: [
+							{
+								innerHTML: "3"
+							},
+							{
+								innerHTML: "-2"
+							},
+						]
+					},
+					{
+						innerHTML: "max",
+						children: [
+							{
+								innerHTML: "9"
+							},
+							{
+								innerHTML: "-1"
+							},
+						]
+					},
+				],
+			},
+		],
+	}
+};
+
+let myTree = new Treant( simple_chart_config );
+
+async function alphaBetaSearch(state) {
+	let v = await maxValue(state, -99999, 99999);
+	alert('alphaBetaSearch returns ' + v);
+	return v;
+}
+
+async function maxValue(state, alpha, beta) {
+	if (terminalTest(state)) return utility(state);
+	let v = -99999;
+	for (const a of actions(state)) {
+		v = Math.max(v, await minValue(result(state, a), alpha, beta));
+		await debugNode(state, alpha, beta, v);
+		if (v > beta) return v;
+		alpha = Math.max(alpha, v);
+		await debugNode(state, alpha, beta, v);
+	}
+	state.innerHTML = '✓<br/>' + state.innerHTML;
+	return v;
+}
+
+async function minValue(state, alpha, beta) {
+	if (terminalTest(state)) return utility(state);
+	let v = 99999;
+	for (const a of actions(state)) {
+		v = Math.min(v, await maxValue(result(state, a), alpha, beta));
+		await debugNode(state, alpha, beta, v);
+		if (v <= alpha) return v;
+		beta = Math.min(beta, v);
+		await debugNode(state, alpha, beta, v);
+	}
+	state.innerHTML = '✓<br/>' + state.innerHTML;
+	return v;
+}
+
+const terminalTest = (state) => console.log(state) || !state.children;
+const actions = (state) => state.children;
+const result = (state, a) => a;
+const utility = (state) => {
+	const nb = parseInt(state.innerHTML);
+	state.innerHTML = '✓ ' + state.innerHTML;
+	return nb;
+}
+
+const delay = (ms) => new Promise(r => setTimeout(r, ms));
+const waitForButton = async () => {
+	while (!window.NEXT) {
+		await delay(50);
+	}
+	window.NEXT = false;
+};
+
+const debugNode = async (state, alpha, beta, v) => {
+	const pr = (a) => a === 99999 ? '+∞' : a === -99999 ? '-∞' : a;
+	const append = (p, val) => { state[p] = state[p] ?? []; state[p].push(val) };
+	append('alpha', pr(alpha));
+	append('beta', pr(beta));
+	append('v', pr(v));
+	state.innerHTML = `v = ${state.v.join(', ')}<br/>α = ${state.alpha.join(', ')}<br/>β = ${state.beta.join(', ')}`;
+	document.getElementById('OrganiseChart-simple').innerHTML = '';
+	myTree = new Treant( simple_chart_config );
+
+	await waitForButton();
+}
+
+console.log(alphaBetaSearch(simple_chart_config.nodeStructure));
+
+	</script>
+
+</body>
+</html>
